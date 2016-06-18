@@ -12,6 +12,7 @@ ______
 Author: Arthur Asatryan
 Company: SFL LLC
 Email: arthur.asatryan@sflpro.com
-Git:
+Git: https://github.com/Biacode/presentations/tree/master/tdd
+Youtube: https://www.youtube.com/watch?v=Y-fIxme-Jr0
 
 
