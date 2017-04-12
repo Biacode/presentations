@@ -1,16 +1,20 @@
 # Conferences
-#Actor model using Akka
+###Actor model using Akka
+
 Location - SFL LLC
 
-#Let's do some TDD and BDD together (live coding)
+###Let's do some TDD and BDD together (live coding)
+
 Conference - Barcamp
 
 Video - https://www.youtube.com/watch?v=Y-fIxme-Jr0
 
-#SQL vs NoSQL- Civil War
+###SQL vs NoSQL- Civil War
+
 Conference - Barcamp
 
 Video - https://www.youtube.com/watch?v=nRHW9uKAaoo
 
-#Containerized Infrastructure
+###Containerized Infrastructure
+
 Location - SFL LLC
