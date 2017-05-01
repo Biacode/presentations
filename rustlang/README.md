@@ -4,7 +4,7 @@ Author: Arthur Asatryan
 GitHub: https://github.com/Biacode
 Linkedin: https://www.linkedin.com/in/arthur-asatryan/
 Twitter: https://twitter.com/biacode
-Currenly working as Java Software Engineer at SFL LLC.
+Java Software Engineer at SFL LLC.
 ```
 
 ### Rust
