@@ -67,7 +67,7 @@ The rust documentation is really differs from your know language documentations:
 
 **Cons**
 * There is no such libraries which are passed their proof of concept for a long run.
-* The existing libraries no have stable / immutable API yet.
+* The existing libraries have no stable / immutable API yet.
 * The language itself is not newbie friendly, and it takes decent learning course.
 * No real books, only documentation and article pages (although the docs are amazing).
 * to be continued...
