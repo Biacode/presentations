@@ -56,6 +56,26 @@ The rust documentation is really differs from your know language documentations:
 * ARC
 * to be continued...
 
+### Web stack libraries
+* Web framework - [Rocket](https://rocket.rs/)
+* ORM - [Diesel](http://diesel.rs/)
+* Serialize/Deserialize - [Serde](https://serde.rs/)
+
+### Logging
+* Logging - [Simple Logging Facade](https://github.com/rust-lang-nursery/log)
+* Log4Rs - [log4rs](https://github.com/sfackler/log4rs)
+
+### Game dev
+* Piston game engine - [pisto](http://www.piston.rs/)
+* Amethyst game engine - [amethyst](https://www.amethyst.rs/)
+
+### Others
+* OS - [RadoxOS](https://www.redox-os.org/)
+* GPU rendering terminal - [Alacritty](https://github.com/jwilm/alacritty)
+* ANSI term - [rust-ansi-term](https://github.com/ogham/rust-ansi-term)
+
+See a lot more [awesomerust](https://github.com/kud1ing/awesome-rust)
+
 ### Summary
 **Pros**
 * Amazing community.
