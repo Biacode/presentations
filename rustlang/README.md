@@ -39,23 +39,36 @@ The rustup brings:
 
 ### Documentation
 The rust documentation is really differs from your know language documentations:
-* Compile time
-* Unified host for all open source documentations
-* Markdown support
+* Markdown support.
+* Compile time checks.
+* Unified host for all open source libs documentations.
+* Examples are everywhere.
+* to be continued...
 
 ### Language semantics
 * Borrow checker
-* Life time
+* Life times
+* to be continued...
 
 ### Concurrency
 * ARC
+* to be continued...
 
 ### Summary
 Pros
-* foo
+* Amazing community.
+* Very fast.
+* Concurrent.
+* Functional.
+* Makes system lvl programming fun.
+* to be continued...
 
 Cons
-*
+* There is no such libraries which are passed their proof of concept for a long run.
+* The existing libraries no have stable / immutable API yet.
+* The language itself is not newbie friendly, and it takes decent learning course.
+* No real books, only documentation and article pages (although the docs are amazing).
+* to be continued...
 
 ### Useful links
 * [Documentation](https://www.rust-lang.org/en-US/documentation.html)
