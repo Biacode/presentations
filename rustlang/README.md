@@ -1,10 +1,10 @@
 ### About me
 ```
 Author: Arthur Asatryan
+Software Engineer at SFL LLC.
 GitHub: https://github.com/Biacode
 Linkedin: https://www.linkedin.com/in/arthur-asatryan/
 Twitter: https://twitter.com/biacode
-Java Software Engineer at SFL LLC.
 ```
 
 ### Rust
@@ -14,6 +14,7 @@ It accomplishes these goals by being memory safe without using garbage collectio
 * Rust supports functional and imperative-procedural paradigms.
 * Rust used to develop [servo](https://en.wikipedia.org/wiki/Servo_(layout_engine)) browser.
 * Rust won first place for "most loved programming language" in the Stack Overflow Developer Survey in 2016 and 2017.
+* Benchmarks at [Benchmarksgame](https://benchmarksgame.alioth.debian.org/u64q/compare.php?lang=rust&lang2=gpp)
 * [Who uses rust.](https://www.rust-lang.org/en-US/friends.html)
 
 ## Why rust is so amazing
@@ -55,7 +56,7 @@ The rust documentation is really differs from your know language documentations:
 * to be continued...
 
 ### Summary
-Pros
+**Pros**
 * Amazing community.
 * Very fast.
 * Concurrent.
@@ -63,7 +64,7 @@ Pros
 * Makes system lvl programming fun.
 * to be continued...
 
-Cons
+**Cons**
 * There is no such libraries which are passed their proof of concept for a long run.
 * The existing libraries no have stable / immutable API yet.
 * The language itself is not newbie friendly, and it takes decent learning course.
