@@ -1,0 +1,65 @@
+### About me
+```
+Author: Arthur Asatryan
+GitHub: https://github.com/Biacode
+Linkedin: https://www.linkedin.com/in/arthur-asatryan/
+Twitter: https://twitter.com/biacode
+Currenly working as Java Software Engineer at SFL LLC.
+```
+
+### Rust
+Rust is a modern systems programming language focusing on safety, speed, and concurrency.
+It accomplishes these goals by being memory safe without using garbage collection.
+
+* Rust supports functional and imperative-procedural paradigms.
+* Rust used to develop [servo](https://en.wikipedia.org/wiki/Servo_(layout_engine)) browser.
+* Rust won first place for "most loved programming language" in the Stack Overflow Developer Survey in 2016 and 2017.
+* [Who uses rust.](https://www.rust-lang.org/en-US/friends.html)
+
+## Why rust is so amazing
+
+### Simple Installation
+Go to [https://www.rustup.rs](https://www.rustup.rs)
+which suggests to copy and paste `curl https://sh.rustup.rs -sSf | sh` to your terminal.
+
+### The rustup toolchain
+The rustup brings:
+* The rust programming language itself such as standard library etc...
+* `rustc` - The rust-lang compiler.
+* `rustup` - The CLI tool which helps to change language distribution channels like `stable`, `beta`, `nightly` and not only.
+* `rustdoc` - The rust documentation generator.
+* `cargo` - The [cargo](https://crates.io/) package manager.
+* Testing, debugging tools and such.
+
+### Cargo package manager
+[crates.io](https://crates.io/) the Rust community’s crate host.
+* Unified tool and central repository for entire rust community.
+* Easy to use and very intuitive CLI commands.
+* Build, execute, test, benchmark and publish bin or lib projects.
+
+### Documentation
+The rust documentation is really differs from your know language documentations:
+* Compile time
+* Unified host for all open source documentations
+* Markdown support
+
+### Language semantics
+* Borrow checker
+* Life time
+
+### Concurrency
+* ARC
+
+### Summary
+Pros
+* foo
+
+Cons
+*
+
+### Useful links
+* [Documentation](https://www.rust-lang.org/en-US/documentation.html)
+* [Gitter](https://gitter.im/rust-lang/rust)
+* [Forum](https://users.rust-lang.org/)
+* [Are we web yet?](http://www.arewewebyet.org/)
+* [Play Rust](https://play.rust-lang.org/)

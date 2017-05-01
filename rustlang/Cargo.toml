@@ -1,0 +1,6 @@
+[package]
+name = "rustlang"
+version = "0.1.0"
+authors = ["Arthur Asatryan <biacoder@gmail.com>"]
+
+[dependencies]
