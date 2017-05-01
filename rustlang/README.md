@@ -47,8 +47,9 @@ The rust documentation is really differs from your know language documentations:
 * to be continued...
 
 ### Language semantics
-* Borrow checker
-* Life times
+* Borrow checker.
+* Life times.
+* Zero cost abstractions.
 * to be continued...
 
 ### Concurrency
