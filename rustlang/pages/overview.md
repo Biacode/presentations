@@ -20,10 +20,13 @@ Rust has both, safety and control in the same place.
 * Have very small runtime.
 * LLVM backend and optimizations.
 * Statically typed.
+* Move semantics.
+* Zero cost abstractions.
 * No segfaults.
 * No dangling pointers.
 * No null pointers.
-* No data races parallel code.
+* Iterator invalidation problems.
+* No data races.
 * Used to develop [servo](https://en.wikipedia.org/wiki/Servo_(layout_engine)) browser.
 * Rust won first place for "most loved programming language" in the Stack Overflow Developer Survey in 2016 and 2017.
 * Benchmarks at [Benchmarksgame](https://benchmarksgame.alioth.debian.org/u64q/compare.php?lang=rust&lang2=gpp)
@@ -59,15 +62,48 @@ The rust documentation is really differs from your know language documentations:
 * to be continued...
 
 ### Language semantics
+* Ownership.
 * Borrowing.
 * Life times.
-* Ownership.
-* Move semantics.
-* Zero cost abstractions.
 * to be continued...
 
 There is only one owner of the data at the same time.
+```rust
+#[derive(Debug)]
+struct User(u32);
 
+fn main() {
+    let user = User(46); // the owner is main function
+    consume_user(user); // user moved to the `consume_user` function
+    println!("user = {:?}", user); // error occurs here (trying to access moved variable)
+}
+
+fn consume_user(user: User) {
+    println!("user = {:?}", user);
+}
+```
+Output
+```
+/home/arthur/.cargo/bin/cargo run --color=always --example tests
+   Compiling rustlang v0.1.0 (file:///home/arthur/Projects/biacode/presentations/rustlang)
+error[E0382]: use of moved value: `user`
+ --> examples/tests.rs:7:29
+  |
+6 |     consume_user(user); // user moved to the `consume_user` function
+  |                  ---- value moved here
+7 |     println!("user = {:?}", user); // error occurs here (trying to access moved variable)
+  |                             ^^^^ value used here after move
+  |
+  = note: move occurs because `user` has type `User`, which does not implement the `Copy` trait
+
+error: aborting due to previous error
+
+error: Could not compile `rustlang`.
+
+To learn more, run the command again with --verbose.
+
+Process finished with exit code 101
+```
 ### Concurrency
 * ARC
 * to be continued...
