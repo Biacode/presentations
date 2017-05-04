@@ -7,7 +7,7 @@ Linkedin: https://www.linkedin.com/in/arthur-asatryan/
 Twitter: https://twitter.com/biacode
 ```
 
-### Rust
+### Why Rust
 Rust is a modern systems programming language focusing on safety, speed, and concurrency.
 It accomplishes these goals by being memory safe without using garbage collection.
 
