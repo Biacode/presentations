@@ -104,6 +104,36 @@ To learn more, run the command again with --verbose.
 
 Process finished with exit code 101
 ```
+Solution 1. Copy trait
+```rust
+#[derive(Debug, Clone, Copy)]
+struct User(u32);
+
+fn main() {
+    let user = User(46);
+    consume_user(user); // No move. Instead we're passing copy of the user
+    println!("user = {:?}", user);
+}
+
+fn consume_user(user: User) {
+    println!("user = {:?}", user);
+}
+```
+Solution 2. Borrowed reference
+```rust
+#[derive(Debug)]
+struct User(u32);
+
+fn main() {
+    let user = User(46);
+    consume_user(&user); // passing reference of the user (reference borrowing)
+    println!("user = {:?}", user);
+}
+
+fn consume_user(user: &User) {
+    println!("user = {:?}", user);
+}
+```
 ### Concurrency
 * ARC
 * to be continued...
