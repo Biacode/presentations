@@ -7,12 +7,24 @@ Linkedin: https://www.linkedin.com/in/arthur-asatryan/
 Twitter: https://twitter.com/biacode
 ```
 
-### Why Rust
+### What is rust? Why rust?
 Rust is a modern systems programming language focusing on safety, speed, and concurrency.
-It accomplishes these goals by being memory safe without using garbage collection.
+It accomplishes these goals by being memory safe without using garbage collection.\
+In current IT sphere, you have safety or more control.\
+Rust has both, safety and control in the same place.
 
-* Rust supports functional and imperative-procedural paradigms.
-* Rust used to develop [servo](https://en.wikipedia.org/wiki/Servo_(layout_engine)) browser.
+* Supports functional and imperative-procedural paradigms.
+* Gives you safety.
+* Move semantics.
+* More close to the bare metal.
+* Does not have garbage collector.
+* Have very small runtime.
+* LLVM backend and optimizations.
+* Statically typed.
+* No segfaults.
+* No dangling pointers.
+* No null pointers.
+* Used to develop [servo](https://en.wikipedia.org/wiki/Servo_(layout_engine)) browser.
 * Rust won first place for "most loved programming language" in the Stack Overflow Developer Survey in 2016 and 2017.
 * Benchmarks at [Benchmarksgame](https://benchmarksgame.alioth.debian.org/u64q/compare.php?lang=rust&lang2=gpp)
 * [Who uses rust.](https://www.rust-lang.org/en-US/friends.html)
