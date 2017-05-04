@@ -24,6 +24,7 @@ Rust has both, safety and control in the same place.
 * No segfaults.
 * No dangling pointers.
 * No null pointers.
+* No data races parallel code.
 * Used to develop [servo](https://en.wikipedia.org/wiki/Servo_(layout_engine)) browser.
 * Rust won first place for "most loved programming language" in the Stack Overflow Developer Survey in 2016 and 2017.
 * Benchmarks at [Benchmarksgame](https://benchmarksgame.alioth.debian.org/u64q/compare.php?lang=rust&lang2=gpp)
