@@ -15,7 +15,6 @@ Rust has both, safety and control in the same place.
 
 * Supports functional and imperative-procedural paradigms.
 * Gives you safety.
-* Move semantics.
 * More close to the bare metal.
 * Does not have garbage collector.
 * Have very small runtime.
@@ -60,10 +59,14 @@ The rust documentation is really differs from your know language documentations:
 * to be continued...
 
 ### Language semantics
-* Borrow checker.
+* Borrowing.
 * Life times.
+* Ownership.
+* Move semantics.
 * Zero cost abstractions.
 * to be continued...
+
+There is only one owner of the data at the same time.
 
 ### Concurrency
 * ARC
