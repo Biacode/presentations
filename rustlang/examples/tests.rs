@@ -4,14 +4,10 @@ struct User {
 }
 
 fn main() {
-    let foo: &u32;
+    let mut user_vec = Vec::new();
     {
-        let boo = 40_u32;
-        foo = &boo; // borrowing reference, but `foo` goes out of scope
+        let immut_borrow_user = &user_vec;
+        user_vec.push(User { age: 18 });
     }
-    println!("foo = {:?}", foo);
-}
-
-fn consume_user(user: &User) {
-    println!("user = {:?}", user);
+    user_vec.push(User { age: 35 })
 }

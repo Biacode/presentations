@@ -151,9 +151,79 @@ error: `boo` does not live long enough
    | - borrowed value needs to live until here
 ```
 
+### Memory management
+Rust has fine-grained memory management.
+And because of borrowing and ownership, it becames automatically managed.
+
+The heap allocated variables.\
+**NOTE:** We're using experimental features here
+```rust
+#![feature(box_syntax)]
+
+struct User {
+    age: u32
+}
+
+fn main() {
+    let user = box User { age: 35 };
+} // user goes out of scope
+```
+Reference counting for shared memory`
+```rust
+use std::rc::Rc;
+
+#[derive(Debug)]
+struct User {
+    age: u32
+}
+
+fn main() {
+    let user = Rc::new(User { age: 26 }); // ref count 1
+    {
+        let user_clone = user.clone(); // ref count 2
+        consume_user(user_clone);
+    } // ref count 1
+    consume_user(user.clone()); // move
+} // ref count 0
+
+fn consume_user(user: Rc<User>) {
+    println!("user = {:?}", user);
+}
+```
+Avoiding iterator invalidation
+```rust
+#[derive(Debug)]
+struct User {
+    age: u32
+}
+
+fn main() {
+    let mut user_vec = Vec::new();
+    {
+        let immut_borrow_user = &user_vec;
+        user_vec.push(User { age: 18 }); // error
+    }
+    user_vec.push(User { age: 35 }); // ok here
+}
+```
+Output
+```
+error[E0502]: cannot borrow `user_vec` as mutable because it is also borrowed as immutable
+  --> examples/tests.rs:10:9
+   |
+9  |         let immut_borrow_user = &user_vec;
+   |                                  -------- immutable borrow occurs here
+10 |         user_vec.push(User { age: 18 });
+   |         ^^^^^^^^ mutable borrow occurs here
+11 |     }
+   |     - immutable borrow ends here
+```
+
 ### Concurrency
 * ARC
 * to be continued...
+
+Ownership and borrowing prevents data races
 
 ### Web stack libraries
 * Web framework - [Rocket](https://rocket.rs/)
