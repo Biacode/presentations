@@ -85,8 +85,6 @@ fn consume_user(user: User) {
 ```
 Output
 ```
-/home/arthur/.cargo/bin/cargo run --color=always --example tests
-   Compiling rustlang v0.1.0 (file:///home/arthur/Projects/biacode/presentations/rustlang)
 error[E0382]: use of moved value: `user`
  --> examples/tests.rs:7:29
   |
@@ -96,14 +94,6 @@ error[E0382]: use of moved value: `user`
   |                             ^^^^ value used here after move
   |
   = note: move occurs because `user` has type `User`, which does not implement the `Copy` trait
-
-error: aborting due to previous error
-
-error: Could not compile `rustlang`.
-
-To learn more, run the command again with --verbose.
-
-Process finished with exit code 101
 ```
 Copy trait
 ```rust
@@ -137,6 +127,29 @@ fn consume_user(user: &User) {
 }
 ```
 ### Lifetime
+```rust
+fn main() {
+    let foo: &u32;
+    {
+        let boo = 40_u32;
+        foo = &boo; // borrowing reference, but `foo` goes out of scope
+    }
+    println!("foo = {:?}", foo);
+}
+```
+Output
+```
+error: `boo` does not live long enough
+  --> examples/tests.rs:11:5
+   |
+10 |         foo = &boo;
+   |                --- borrow occurs here
+11 |     }
+   |     ^ `boo` dropped here while still borrowed
+12 |     println!("foo = {:?}", foo);
+13 | }
+   | - borrowed value needs to live until here
+```
 
 ### Concurrency
 * ARC
