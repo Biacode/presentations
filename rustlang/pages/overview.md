@@ -67,6 +67,7 @@ The rust documentation is really differs from your know language documentations:
 * Life times.
 * to be continued...
 
+### Ownership
 There is only one owner of the data at the same time.
 ```rust
 #[derive(Debug)]
@@ -104,7 +105,7 @@ To learn more, run the command again with --verbose.
 
 Process finished with exit code 101
 ```
-Solution 1. Copy trait
+Copy trait
 ```rust
 #[derive(Debug, Clone, Copy)]
 struct User(u32);
@@ -119,7 +120,8 @@ fn consume_user(user: User) {
     println!("user = {:?}", user);
 }
 ```
-Solution 2. Borrowed reference
+
+### Borrowing
 ```rust
 #[derive(Debug)]
 struct User(u32);
@@ -134,6 +136,8 @@ fn consume_user(user: &User) {
     println!("user = {:?}", user);
 }
 ```
+### Lifetime
+
 ### Concurrency
 * ARC
 * to be continued...
