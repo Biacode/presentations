@@ -265,9 +265,11 @@ See a lot more [awesomerust](https://github.com/kud1ing/awesome-rust)
 
 **Cons**
 * There is no such libraries which are passed their proof of concept for a long run.
-* The existing libraries have no stable / immutable API yet.
+* The existing libraries in most cases have no stable / immutable API yet.
+Cargo as well as Rust lang itself using [Semantic Versioning](http://semver.org) principle
 * The language itself is not newbie friendly, and it takes decent learning course.
-* No real books, only documentation and article pages (although the docs are amazing).
+* No real books, only documentation and article pages.
+Although the docs are amazing, also there is milestone to publish first rust book.
 * to be continued...
 
 ### Useful links
