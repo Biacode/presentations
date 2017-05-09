@@ -231,7 +231,55 @@ error[E0502]: cannot borrow `user_vec` as mutable because it is also borrowed as
 * ARC
 * to be continued...
 
+Mutable state is not bad.\
+Shared immutable state is not bad.\
+Shared mutable state is bad.
+
 Ownership and borrowing prevents data races
+
+No shared data, no mutable state
+```rust
+use std::thread;
+
+fn main() {
+    thread::spawn(|| {
+        println!("Hello, World!");
+    });
+}
+```
+Shared mutable state
+```rust
+#[derive(Debug)]
+struct User {
+    age: u32
+}
+
+fn main() {
+    let mut user = vec!();
+    std::thread::spawn(|| {
+        user.push(User { age: 45 })
+    });
+}
+```
+Output
+```
+losure may outlive the current function, but it borrows `user`, which is owned by the current function
+```
+`move` keyword moves the closure environment
+```rust
+#[derive(Debug)]
+struct User {
+    age: u32
+}
+
+fn main() {
+    let mut user = vec!();
+    std::thread::spawn(move || {
+        user.push(User { age: 45 })
+    });
+    user.push(User { age: 17 }) // COMPILE error - use of moved value: `user`
+}
+```
 
 ### Web stack libraries
 * Web framework - [Rocket](https://rocket.rs/)

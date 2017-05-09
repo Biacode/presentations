@@ -4,10 +4,9 @@ struct User {
 }
 
 fn main() {
-    let mut user_vec = Vec::new();
-    {
-        let immut_borrow_user = &user_vec;
-        user_vec.push(User { age: 18 });
-    }
-    user_vec.push(User { age: 35 })
+    let mut user = vec!();
+    std::thread::spawn(move || {
+        user.push(User { age: 45 })
+    });
+    user.push(User { age: 17 })
 }
