@@ -334,6 +334,8 @@ fn produce_user() -> User {
 }
 ```
 
+### FFI
+
 ### Web stack libraries
 * Web framework - [Rocket](https://rocket.rs/)
 * ORM - [Diesel](http://diesel.rs/)
@@ -362,6 +364,7 @@ See a lot more [awesomerust](https://github.com/kud1ing/awesome-rust)
 * Concurrent.
 * Functional.
 * Makes system lvl programming fun.
+* Easy embedding into other languages.
 * to be continued...
 
 **Cons**
