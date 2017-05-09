@@ -235,7 +235,7 @@ Mutable state is not bad.\
 Shared immutable state is not bad.\
 Shared mutable state is bad.
 
-Ownership and borrowing prevents data races
+Ownership and borrowing _by default_ prevents data races
 
 No shared data, no mutable state
 ```rust
@@ -278,6 +278,27 @@ fn main() {
         user.push(User { age: 45 })
     });
     user.push(User { age: 17 }) // COMPILE error - use of moved value: `user`
+}
+```
+
+Threads can communicate through channels
+```rust
+#[derive(Debug)]
+struct User {
+    age: u32
+}
+
+fn main() {
+    let (tx, rx) = std::sync::mpsc::channel();
+    std::thread::spawn(move || {
+        tx.send(produce_user())
+    });
+    let recv_user: Result<User, _> = rx.recv();
+    println!("recv_user = {:?}", recv_user.ok().unwrap());
+}
+
+fn produce_user() -> User {
+    User { age: 15 }
 }
 ```
 

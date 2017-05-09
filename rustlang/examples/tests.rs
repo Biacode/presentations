@@ -4,9 +4,14 @@ struct User {
 }
 
 fn main() {
-    let mut user = vec!();
+    let (tx, rx) = std::sync::mpsc::channel();
     std::thread::spawn(move || {
-        user.push(User { age: 45 })
+        tx.send(produce_user())
     });
-    user.push(User { age: 17 })
+    let recv_user: Result<User, _> = rx.recv();
+    println!("recv_user = {:?}", recv_user.ok().unwrap());
+}
+
+fn produce_user() -> User {
+    User { age: 15 }
 }
