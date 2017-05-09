@@ -119,6 +119,15 @@ fn consume_user(user: User) {
 }
 ```
 
+There is only one reference pointer to the data at a time
+```rust
+fn main() {
+    let mut age = 18;
+    let foo = &mut age;
+    let boo = &mut age; // error - cannot borrow `age` as mutable more than once at a time
+}
+```
+
 ### Borrowing
 ```rust
 #[derive(Debug)]
