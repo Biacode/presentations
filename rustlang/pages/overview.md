@@ -302,6 +302,29 @@ fn produce_user() -> User {
 }
 ```
 
+Shared state with `Arc` - Atomic Reference Counter
+```rust
+#[derive(Debug)]
+struct User {
+    age: u32
+}
+
+fn main() {
+    let user = std::sync::Arc::new(produce_user());
+    let user_c = user.clone();
+    for i in 1..10 {
+        let user_c = user.clone();
+        std::thread::spawn(move || {
+            println!("user_c = {:?}", user_c)
+        });
+    }
+}
+
+fn produce_user() -> User {
+    User { age: 15 }
+}
+```
+
 ### Web stack libraries
 * Web framework - [Rocket](https://rocket.rs/)
 * ORM - [Diesel](http://diesel.rs/)

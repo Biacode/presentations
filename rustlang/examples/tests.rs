@@ -4,12 +4,14 @@ struct User {
 }
 
 fn main() {
-    let (tx, rx) = std::sync::mpsc::channel();
-    std::thread::spawn(move || {
-        tx.send(produce_user())
-    });
-    let recv_user: Result<User, _> = rx.recv();
-    println!("recv_user = {:?}", recv_user.ok().unwrap());
+    let user = std::sync::Arc::new(produce_user());
+    let user_c = user.clone();
+    for i in 1..10 {
+        let user_c = user.clone();
+        std::thread::spawn(move || {
+            println!("user_c = {:?}", user_c)
+        });
+    }
 }
 
 fn produce_user() -> User {
