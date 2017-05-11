@@ -15,11 +15,13 @@ Linkedin: https://www.linkedin.com/in/arthur-asatryan/
 Twitter: https://twitter.com/biacode
 ```
 
-### What is rust? Why rust?
+### What is rust?
 Rust is a modern systems programming language focusing on safety, speed, and concurrency.
 It accomplishes these goals by being memory safe without using garbage collection.\
 In current IT sphere, you have safety or more control.\
 Rust has both, safety and control in the same place.
+
+## Why rust is so amazing?
 
 * Supports functional and imperative-procedural paradigms.
 * Gives you safety.
@@ -39,8 +41,6 @@ Rust has both, safety and control in the same place.
 * Rust won first place for "most loved programming language" in the Stack Overflow Developer Survey in 2016 and 2017.
 * Benchmarks at [Benchmarksgame](https://benchmarksgame.alioth.debian.org/u64q/compare.php?lang=rust&lang2=gpp)
 * [Who uses rust.](https://www.rust-lang.org/en-US/friends.html)
-
-## Why rust is so amazing
 
 ### Simple Installation
 Go to [https://www.rustup.rs](https://www.rustup.rs)
