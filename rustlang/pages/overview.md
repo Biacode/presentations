@@ -146,7 +146,7 @@ fn consume_user(user: &User) {
 ### Lifetime
 ```rust
 fn main() {
-    let foo: &u32;
+    let mut foo: &u32;
     {
         let boo = 40_u32;
         foo = &boo; // borrowing reference, but `foo` goes out of scope
