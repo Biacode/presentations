@@ -61,6 +61,36 @@ The rustup brings:
 * Easy to use and very intuitive CLI commands.
 * Build, execute, test, benchmark and publish bin or lib projects.
 
+Example `.toml` file
+```toml
+[package]
+name = "docker4rs"
+version = "0.0.1"
+authors = ["Arthur Asatryan <biacoder@gmail.com>"]
+description = "Docker REST API implementation"
+documentation = "https://docs.rs/docker4rs"
+homepage = "https://github.com/Biacode/docker4rs"
+repository = "https://github.com/Biacode/docker4rs"
+keywords = ["docker", "rest", "api", "client"]
+readme = "README.md"
+license = "Apache-2.0"
+exclude = [
+    ".travis.yml",
+    ".gitignore",
+]
+
+[lib]
+name = "docker4rs"
+path = "src/lib.rs"
+
+[dependencies]
+hyper = "0.9"
+serde = "0.8"
+serde_json = "0.8"
+serde_derive = "0.8"
+log = "0.3"
+```
+
 ### Documentation
 The rust documentation is really differs from your know language documentations:
 * Markdown support.
