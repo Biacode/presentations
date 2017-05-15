@@ -22,7 +22,6 @@ In current IT sphere, you have safety or more control.\
 Rust has both, safety and control in the same place.
 
 ## Why rust is so amazing?
-
 * Supports functional and imperative-procedural paradigms.
 * Gives you safety.
 * More close to the bare metal.
