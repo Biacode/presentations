@@ -89,6 +89,20 @@ serde_json = "0.8"
 serde_derive = "0.8"
 log = "0.3"
 ```
+The publishing crates is really simple.
+
+1. login to crates.io using your access token from dashboard.
+```toml
+cargo login abcdefghijklmnopqrstuvwxyz012345
+```
+2. Package your lib/bin distrubution.
+```toml
+cargo package
+```
+3. And finally publish it to crates.io
+```toml
+cargo publish
+```
 
 [Crates.io](https://crates.io/) is a centralized rust community’s packages repository.\
 Already 151,554,732 Downloads and 9,286 crates.
