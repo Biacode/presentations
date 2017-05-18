@@ -34,7 +34,7 @@ Rust has both, safety and control in the same place.
 * No segfaults.
 * No dangling pointers.
 * No null pointers.
-* Iterator invalidation problems.
+* No iterator invalidation problems.
 * No data races.
 * Used to develop [servo](https://en.wikipedia.org/wiki/Servo_(layout_engine)) browser.
 * Rust won first place for "most loved programming language" in the Stack Overflow Developer Survey in 2016 and 2017.
