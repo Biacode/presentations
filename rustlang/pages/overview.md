@@ -432,3 +432,5 @@ Although the docs are amazing, also there is milestone to publish first rust boo
 * [Forum](https://users.rust-lang.org/)
 * [Are we web yet?](http://www.arewewebyet.org/)
 * [Play Rust](https://play.rust-lang.org/)
+
+Thanks to [Rust Community](https://users.rust-lang.org/t/rust-presentation-review/10858/2) for review.
