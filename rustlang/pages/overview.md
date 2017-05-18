@@ -36,8 +36,8 @@ Rust has both, safety and control in the same place.
 * No null pointers.
 * No iterator invalidation problems.
 * No data races.
-* Used to develop [servo](https://en.wikipedia.org/wiki/Servo_(layout_engine)) browser.
-* Rust won first place for "most loved programming language" in the Stack Overflow Developer Survey in 2016 and 2017.
+* Is used to develop [servo](https://en.wikipedia.org/wiki/Servo_(layout_engine)) browser.
+* Rust won first place for "most loved programming language" in the [Stack Overflow Developer Survey in 2016 and 2017.](https://insights.stackoverflow.com/survey/2017#most-loved-dreaded-and-wanted)
 * Benchmarks at [Benchmarksgame](https://benchmarksgame.alioth.debian.org/u64q/compare.php?lang=rust&lang2=gpp)
 * [Who uses rust.](https://www.rust-lang.org/en-US/friends.html)
 
