@@ -10,6 +10,7 @@
 ```
 Author: Arthur Asatryan
 Software Engineer at SFL LLC.
+Email: biacoder@gmail.com
 GitHub: https://github.com/Biacode
 Linkedin: https://www.linkedin.com/in/arthur-asatryan/
 Twitter: https://twitter.com/biacode
