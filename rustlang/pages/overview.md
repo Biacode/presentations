@@ -400,7 +400,7 @@ fn produce_user() -> User {
 * Amethyst game engine - [amethyst](https://www.amethyst.rs/)
 
 ### Others
-* OS - [RadoxOS](https://www.redox-os.org/)
+* OS - [Redox](https://www.redox-os.org/)
 * GPU rendering terminal - [Alacritty](https://github.com/jwilm/alacritty)
 * ANSI term - [rust-ansi-term](https://github.com/ogham/rust-ansi-term)
 * Terminal colors - [colored](https://github.com/mackwic/colored)
