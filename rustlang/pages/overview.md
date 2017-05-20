@@ -12,8 +12,8 @@ Author: Arthur Asatryan
 Software Engineer at SFL LLC.
 Email: biacoder@gmail.com
 GitHub: https://github.com/Biacode
-Linkedin: https://www.linkedin.com/in/arthur-asatryan/
 Twitter: https://twitter.com/biacode
+Linkedin: https://www.linkedin.com/in/arthur-asatryan/
 ```
 
 ### What is rust?
@@ -23,6 +23,9 @@ In current IT sphere, you have safety or more control.\
 Rust has both, safety and control in the same place.
 
 ## Why rust is so amazing?
+* First of all - **Amazing** Community.
+* Extremely open development process.
+* The community can be part of decisions in [RFC](https://github.com/rust-lang/rfcs)
 * Supports functional and imperative-procedural paradigms.
 * Gives you safety.
 * More close to the bare metal.
