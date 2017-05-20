@@ -425,7 +425,7 @@ Cargo as well as Rust lang itself using [Semantic Versioning](http://semver.org)
 * The language itself is not newbie friendly, and it takes decent learning course.
 * No real books, only documentation and article pages.
 Although the docs are amazing, also there is milestone to publish first rust book.
-* to be continued...
+* Horrendous compile time.
 
 ### Useful links
 * [Documentation](https://www.rust-lang.org/en-US/documentation.html)
