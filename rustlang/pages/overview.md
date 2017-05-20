@@ -323,7 +323,7 @@ fn main() {
 ```
 Output
 ```
-losure may outlive the current function, but it borrows `user`, which is owned by the current function
+closure may outlive the current function, but it borrows `user`, which is owned by the current function
 ```
 `move` keyword moves the closure environment
 ```rust
