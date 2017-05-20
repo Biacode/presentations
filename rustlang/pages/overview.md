@@ -315,7 +315,7 @@ struct User {
 }
 
 fn main() {
-    let mut user = vec!();
+    let mut user = vec![];
     std::thread::spawn(|| {
         user.push(User { age: 45 })
     });
@@ -333,7 +333,7 @@ struct User {
 }
 
 fn main() {
-    let mut user = vec!();
+    let mut user = vec![];
     std::thread::spawn(move || {
         user.push(User { age: 45 })
     });
