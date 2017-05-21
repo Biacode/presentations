@@ -19,7 +19,7 @@ Linkedin: https://www.linkedin.com/in/arthur-asatryan/
 ```
 
 ## Preface
-Some times new comers have some problems to understand essence of software testing.
+Sometimes new comers have some problems to understand essence of software testing.
 * Most of time they have no idea about how to get started.
 * Some don't know what benefits software testing gives them.
 * They need some really basic newbie guide to get started.
@@ -30,8 +30,8 @@ Imagine situation when you need to investigate some library to deal with date an
 And you found that the [JodaTime](http://www.joda.org/joda-time/) is the best solution for you.
 
 Let's say that you don't have existing project and starting from scratch.
-1. You'l open your favorite IDE (in my case it is IntelliJ)
-2. Create a new maven or gradle project (i will use gradle)
+1. You'll open your favorite IDE (in my case it is IntelliJ)
+2. Create a new maven or gradle project (I will use gradle)
 3. Adding joda-time dependency `compile group: 'joda-time', name: 'joda-time', version: '2.9.9'`
 4. And the very first thing that you may want to do is writing a main method to test your new library while reading documentation etc...
 
@@ -40,9 +40,9 @@ Let's say we're implementing user access tokens `AccessToken` which has expirati
 Suppose we have business requirements that we should restrict access if the expiration date is past.\
 We can write an `AccessTokenService` which will be responsible for checking if the given access token is expired or not.\
 If we dive in to joda-time docs, we can find method called `isBeforeNow` which is exactly what we need.\
-So after writing our first business logic we had following filling.
+So after writing our first business logic we have following filling.
 
-* Is the joda works correctly? (naive guy :D)
+* Is the joda lib. working correctly? (naive guy :D)
 * Do I get it right? For beginners (and not only) the date operations are hard to understand.
 
 You will write some code in your `main` method to test it out.\
@@ -80,40 +80,40 @@ The another one as you may already guess is the case when our access token is ex
 ## TDD - Test Driven Development
 So what is TDD?
 
-If short, TDD is when your production code is driven by **test first** approach.
+In short, TDD is when your production code is driven by **test first** approach.
 
 TDD has 3 life cycles
 
 * First we write failing test
-* Then we write code which is some hov makes our failing test green.
+* Then we write code which somehow makes our failing test green.
 * Then we make some refactoring.
 * Continue cycle.
 
 The benefits of this approach are
 
 * We will not have any non covered code.
-* Because of our laziness we will write our system components simple as possible.
+* Because of our laziness we will write our system components as simple as possible.
 * We will make our components decoupled and test them separately.
 
 The list above is just small list of benefits which gives you TDD.
 
 ## Real world example using TDD principles
-Suppose if we need a new method which returns the remaining days before our token will be expired.\
+Suppose we need a new method which returns the remaining days before our token will be expired.\
 Let's call it `remainingDays`.\
-If we follow to TDD principles we will write failing test first.\
+If we follow the TDD principles we will write failing test first.\
 We even have not written the `remainingDays` method in `AccessTokenService`
 
 First we would cover the case when the given access token is null.\
 Then we will check if the access token is expired and throw an `AccessTokenExpiredRuntimeException`.
-The we will cover the case when the access token is not expired, and the remaining days are `7`.
+Then we will cover the case when the access token is not expired, and the remaining days are `7`.
 
 Please see `AccessTokenServiceImplTest` for more details.
 
 ## Mocking
-Now suppose if we have to retrieve our access token from some kind of Database.\
-If case if we have relational database such as MySQL, then we should have JDBC and/or Hibernate to work with our DB.\
-That's mean we will make lot of work just for testing our small application unit.\
-Here where we need some framework, which will _Mock_ all implementation details from us, and return us exactly what we need.
+Now lets suppose we have to retrieve our access token from some kind of Database.\
+In case if we have relational database such as MySQL, we should have JDBC and/or Hibernate to work with our DB.\
+It means we will make lots of work just for testing our small application unit.\
+Here where we need some framework, which will _Mock_ all implementation details, and return us exactly what we need.
 
 For this purpose we will use [easymock](http://easymock.org/).
 
@@ -124,21 +124,21 @@ Let's say we should retrieve our access token from the database by given token.\
 For this we can write some method called `getByToken` which will accept the `token` and return `AccessToken` from the database.\
 In terms of good architecture we will separate our DB lookup logic from service.\
 For this purpose let's create `AccessTokenRepository` interface with `findByToken` method,
-which accepts token and returns access token if it found, otherwise it will return null.
+which accepts token and returns access token if it is found, otherwise it will return null.
 
 We will cover following.
 
 * We're assuming that the token should not be null.
 * In terms of best practices, if our _repository_ can not find access token for given token,
 then our service method should not return null, instead it should throw an exception.
-TIP: In I personally prefer new Java 8 `Optional` to avoid nulls. But this is different story :)
+TIP: I personally prefer new Java 8 `Optional` to avoid nulls. But this is different story :)
 * If the access token is found, then we will return it.
 
 Find future implementation in `AccessTokenServiceImplTest`
 
 # Conclusion
 
-* Testing is not that hard as you think at the beginning. It's just normal flow as you're doing in your regular coding time.
+* Testing is not as hard as you think in the beginning. It's just normal flow as you're doing in your regular coding time.
 * TDD - Test Driven Development is really the way to go, it gives you lot of advantages.
 * Mocking helps you to abstract from particular technology / framework stack, instead you're just testing your business units.
 
