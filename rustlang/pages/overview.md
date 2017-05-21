@@ -1,10 +1,11 @@
+# Rust for the impatient
 ```
   ____       _      ____     ____      _      __  __   ____  
- | __ )     / \    |  _ \   / ___|    / \    |  \/  | |  _ \ 
+ | __ )     / \    |  _ \   / ___|    / \    |  \/  | |  _ \
  |  _ \    / _ \   | |_) | | |       / _ \   | |\/| | | |_) |
- | |_) |  / ___ \  |  _ <  | |___   / ___ \  | |  | | |  __/ 
+ | |_) |  / ___ \  |  _ <  | |___   / ___ \  | |  | | |  __/
  |____/  /_/   \_\ |_| \_\  \____| /_/   \_\ |_|  |_| |_|    
-                                                             
+
 ```
 ### About me
 ```
@@ -96,15 +97,15 @@ log = "0.3"
 The publishing crates is really simple.
 
 1. login to crates.io using your access token from dashboard.
-```toml
+```
 cargo login abcdefghijklmnopqrstuvwxyz012345
 ```
 2. Package your lib/bin distrubution.
-```toml
+```
 cargo package
 ```
 3. And finally publish it to crates.io
-```toml
+```
 cargo publish
 ```
 
