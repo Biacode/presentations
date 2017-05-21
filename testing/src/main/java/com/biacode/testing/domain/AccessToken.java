@@ -36,4 +36,11 @@ public class AccessToken {
     public void setExpiration(final DateTime expiration) {
         this.expiration = expiration;
     }
+
+    @Override
+    public String toString() {
+        return "AccessToken{" + "accessToken='" + accessToken + '\'' +
+                ", expiration=" + expiration +
+                '}';
+    }
 }
