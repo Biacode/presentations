@@ -118,5 +118,28 @@ Here where we need some framework, which will _Mock_ all implementation details 
 For this purpose we will use [easymock](http://easymock.org/).
 
 ## Real world example using mocking principles
-Let's say we should retrieve our access token from the database.\
-For this we can write some method called `getByToken` which will accept the `token` and return `AccessToken` from the database.
+So as before, we need some test to begin.
+
+Let's say we should retrieve our access token from the database by given token.\
+For this we can write some method called `getByToken` which will accept the `token` and return `AccessToken` from the database.\
+In terms of good architecture we will separate our DB lookup logic from service.\
+For this purpose let's create `AccessTokenRepository` interface with `findByToken` method,
+which accepts token and returns access token if it found, otherwise it will return null.
+
+We will cover following.
+
+* We're assuming that the token should not be null.
+* In terms of best practices, if our _repository_ can not find access token for given token,
+then our service method should not return null, instead it should throw an exception.
+TIP: In I personally prefer new Java 8 `Optional` to avoid nulls. But this is different story :)
+* If the access token is found, then we will return it.
+
+Find future implementation in `AccessTokenServiceImplTest`
+
+# Conclusion
+
+* Testing is not that hard as you think at the beginning. It's just normal flow as you're doing in your regular coding time.
+* TDD - Test Driven Development is really the way to go, it gives you lot of advantages.
+* Mocking helps you to abstract from particular technology / framework stack, instead you're just testing your business units.
+
+Thanks.
