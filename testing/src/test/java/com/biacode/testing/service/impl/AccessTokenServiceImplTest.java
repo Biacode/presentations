@@ -21,6 +21,8 @@ public class AccessTokenServiceImplTest {
     //endregion
 
     //region Test methods
+
+    //region expired
     @Test
     public void testExpiresWhenTheAccessTokenIsNotExpired() {
         // test data
@@ -37,13 +39,15 @@ public class AccessTokenServiceImplTest {
     public void testExpiresWhenTheAccessTokenIsExpired() {
         // test data
         final String token = UUID.randomUUID().toString();
-        final DateTime expires = DateTime.now().minusDays(2);
+        final DateTime expires = DateTime.now().minusHours(2);
         final AccessToken accessToken = new AccessToken(token, expires);
         // test scenario
         final boolean isExpired = accessTokenService.expired(accessToken);
         // assertions
         assertTrue(isExpired);
     }
+    //endregion
+
     //endregion
 
 }

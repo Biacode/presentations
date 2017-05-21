@@ -76,8 +76,8 @@ Any code written in this package will be excluded from production build.
 
 So let's create a new class called `AccessTokenServiceImplTest` in test package.
 
-Because we don't want to write main method for each `unit test` we will investigate and find solution for this.\
-And we will notice that there is library/framework called [junit](http://junit.org/junit4/faq.html#overview_1).
+It would be nice if we can have some library/framework which will execute our `unit test`.\
+We will use [junit](http://junit.org/junit4/faq.html#overview_1) for this purpose.
 
 Short about junit.
 
@@ -112,7 +112,7 @@ The another one as you may already guess is the case when our access token is ex
 public void testExpiresWhenTheAccessTokenIsExpired() {
     // test data
     final String token = UUID.randomUUID().toString();
-    final DateTime expires = DateTime.now().minusDays(2);
+    final DateTime expires = DateTime.now().minusHours(2);
     final AccessToken accessToken = new AccessToken(token, expires);
     // test scenario
     final boolean isExpired = accessTokenService.expired(accessToken);
@@ -120,3 +120,4 @@ public void testExpiresWhenTheAccessTokenIsExpired() {
     assertTrue(isExpired);
 }
 ```
+
