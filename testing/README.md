@@ -38,32 +38,15 @@ Let's say that you don't have existing project and starting from scratch.
 Let's say we're implementing user access tokens `AccessToken` which has expiration date and time.
 
 Suppose we have business requirements that we should restrict access if the expiration date is past.\
-We can write an `AccessTokenService` which will be responsible for checking if the given access token is expired or not.
-
-If we dive in to joda-time docs, we can find method called `isBeforeNow` which is exactly what we need.
-
-```java
-public boolean expired(final AccessToken accessToken) {
-    return accessToken.getExpiration().isBeforeNow();
-}
-```
-
+We can write an `AccessTokenService` which will be responsible for checking if the given access token is expired or not.\
+If we dive in to joda-time docs, we can find method called `isBeforeNow` which is exactly what we need.\
 So after writing our first business logic we had following filling.
 
 * Is the joda works correctly? (naive guy :D)
 * Do I get it right? For beginners (and not only) the date operations are hard to understand.
 
-You will write some code in your `main` method to test it out.
-
-```java
-final AccessToken accessToken = new AccessToken(UUID.randomUUID().toString(), DateTime.now().plusDays(3));
-if (accessTokenService().expired(accessToken)) {
-    System.out.println("The access token - " + accessToken + " is expired.");
-} else {
-    System.out.println("The access token - " + accessToken + " is not expired.");
-}
-```
-
+You will write some code in your `main` method to test it out.\
+Find working example in `MainApplication`\
 If we run the application we will notice that the access token is not expired.
 
 So everything goes as expected.\
@@ -89,35 +72,51 @@ JUnit is a simple, open source framework to write and run repeatable tests. It i
 
 Now when we have some knowledge about junit framework let's write our first test.
 
-We can (and should) cover at lest two cases.
-
-One case is when the access token is not expired.
-```java
-@Test
-public void testExpiresWhenTheAccessTokenIsNotExpired() {
-    // test data
-    final String token = UUID.randomUUID().toString();
-    final DateTime expires = DateTime.now().plusDays(3);
-    final AccessToken accessToken = new AccessToken(token, expires);
-    // test scenario
-    final boolean isExpired = accessTokenService.expired(accessToken);
-    // assertions
-    assertFalse(isExpired);
-}
-```
-
+We can **and should** cover at lest three cases.\
+One case is when the access token is null.\
+The second case is when access token is not expired.\
 The another one as you may already guess is the case when our access token is expired.
-```java
-@Test
-public void testExpiresWhenTheAccessTokenIsExpired() {
-    // test data
-    final String token = UUID.randomUUID().toString();
-    final DateTime expires = DateTime.now().minusHours(2);
-    final AccessToken accessToken = new AccessToken(token, expires);
-    // test scenario
-    final boolean isExpired = accessTokenService.expired(accessToken);
-    // assertions
-    assertTrue(isExpired);
-}
-```
 
+## TDD - Test Driven Development
+So what is TDD?
+
+If short, TDD is when your production code is driven by **test first** approach.
+
+TDD has 3 life cycles
+
+* First we write failing test
+* Then we write code which is some hov makes our failing test green.
+* Then we make some refactoring.
+* Continue cycle.
+
+The benefits of this approach are
+
+* We will not have any non covered code.
+* Because of our laziness we will write our system components simple as possible.
+* We will make our components decoupled and test them separately.
+
+The list above is just small list of benefits which gives you TDD.
+
+## Real world example using TDD principles
+Suppose if we need a new method which returns the remaining days before our token will be expired.\
+Let's call it `remainingDays`.\
+If we follow to TDD principles we will write failing test first.\
+We even have not written the `remainingDays` method in `AccessTokenService`
+
+First we would cover the case when the given access token is null.\
+Then we will check if the access token is expired and throw an `AccessTokenExpiredRuntimeException`.
+The we will cover the case when the access token is not expired, and the remaining days are `7`.
+
+Please see `AccessTokenServiceImplTest` for more details.
+
+## Mocking
+Now suppose if we have to retrieve our access token from some kind of Database.\
+If case if we have relational database such as MySQL, then we should have JDBC and/or Hibernate to work with our DB.\
+That's mean we will make lot of work just for testing our small application unit.\
+Here where we need some framework, which will _Mock_ all implementation details from us, and return us exactly what we need.
+
+For this purpose we will use [easymock](http://easymock.org/).
+
+## Real world example using mocking principles
+Let's say we should retrieve our access token from the database.\
+For this we can write some method called `getByToken` which will accept the `token` and return `AccessToken` from the database.
