@@ -24,3 +24,13 @@ Some times new comers have some problems to understand essence of software testi
 * Some don't know what benefits software testing gives them.
 * They need some really basic newbie guide to get started.
 * Some of them event think that the testing of **their own** application is not their business, because it's QA job.
+
+## Real world example
+Imagine situation when you need to investigate some library to deal with date and time.\
+And you found that the [JodaTime](http://www.joda.org/joda-time/) is the best solution for you.
+
+Let's say that you don't have existing project and starting from scratch.
+1. You'l open your favorite IDE (in my case it is IntelliJ)
+2. Create a new maven or gradle project (i will use gradle)
+3. Adding joda-time dependency
+4. And the very first thing that you may want to do is writing a main method to test your new library while reading documentation etc...
