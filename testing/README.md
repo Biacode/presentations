@@ -131,7 +131,7 @@ We will cover following.
 * We're assuming that the token should not be null.
 * In terms of best practices, if our _repository_ can not find access token for given token,
 then our service method should not return null, instead it should throw an exception.\
-**TIP:** I personally prefer new Java 8 `Optional` to avoid nulls. But this is different story :)
+**TIP:** _I personally prefer new Java 8 `Optional` to avoid nulls. But this is different story :)_
 * If the access token is found, then we will return it.
 
 Find future implementation in `AccessTokenServiceImplTest`
