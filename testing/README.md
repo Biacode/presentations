@@ -23,7 +23,7 @@ Sometimes new comers have some problems to understand essence of software testin
 * Most of time they have no idea about how to get started.
 * Some don't know what benefits software testing gives them.
 * They need some really basic newbie guide to get started.
-* Some of them event think that the testing of **their own** application is not their business, because it's QA job.
+* Some of them even think that the testing of **their own** application is not their business, because it's QA job.
 
 ## Real world example
 Imagine situation when you need to investigate some library to deal with date and time.\
@@ -32,12 +32,12 @@ And you found that the [JodaTime](http://www.joda.org/joda-time/) is the best so
 Let's say that you don't have existing project and starting from scratch.
 1. You'll open your favorite IDE (in my case it is IntelliJ)
 2. Create a new maven or gradle project (I will use gradle)
-3. Adding joda-time dependency `compile group: 'joda-time', name: 'joda-time', version: '2.9.9'`
+3. Add joda-time dependency
 4. And the very first thing that you may want to do is writing a main method to test your new library while reading documentation etc...
 
-Let's say we're implementing user access tokens `AccessToken` which has expiration date and time.
+Let's say we're implementing user access token `AccessToken` which has expiration date.
 
-Suppose we have business requirements that we should restrict access if the expiration date is past.\
+Suppose we have business requirements that we should restrict access if the access token is expired.\
 We can write an `AccessTokenService` which will be responsible for checking if the given access token is expired or not.\
 If we dive in to joda-time docs, we can find method called `isBeforeNow` which is exactly what we need.\
 So after writing our first business logic we have following filling.
@@ -73,9 +73,9 @@ JUnit is a simple, open source framework to write and run repeatable tests. It i
 Now when we have some knowledge about junit framework let's write our first test.
 
 We can **and should** cover at lest three cases.\
-One case is when the access token is null.\
-The second case is when access token is not expired.\
-The another one as you may already guess is the case when our access token is expired.
+One case is when the access token is null (invalid arguments).\
+Next case is when access token is not expired.\
+And another one as you may already guess is the case when our access token is expired.
 
 ## TDD - Test Driven Development
 So what is TDD?
