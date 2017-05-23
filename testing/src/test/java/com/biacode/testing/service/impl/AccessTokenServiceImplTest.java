@@ -106,14 +106,14 @@ public class AccessTokenServiceImplTest extends EasyMockSupport {
     @Test
     public void testRemainingDaysWhenEqualsTo7() {
         // test data
-        final int expectedDays = 7;
+        final int expectedDays = 6;
         final String token = UUID.randomUUID().toString();
-        final DateTime expiration = DateTime.now().plusDays(expectedDays);
+        final DateTime expiration = DateTime.now().plusDays(expectedDays).plusDays(1);
         final AccessToken accessToken = new AccessToken(token, expiration);
         // test scenario
         final int remainingDays = accessTokenService.remainingDays(accessToken);
         // assertions
-        assertEquals(expectedDays - 1, remainingDays);
+        assertEquals(expectedDays, remainingDays);
     }
     //endregion
 
@@ -132,10 +132,12 @@ public class AccessTokenServiceImplTest extends EasyMockSupport {
 
     @Test
     public void testGetByTokenWhenAccessTokenDoesNotExists() {
+        resetAll();
         // test data
         final String token = UUID.randomUUID().toString();
         // test scenario
         expect(accessTokenRepository.findByToken(token)).andReturn(null);
+        replayAll();
         try {
             accessTokenService.getByToken(token);
             fail();
@@ -144,6 +146,24 @@ public class AccessTokenServiceImplTest extends EasyMockSupport {
             assertEquals(token, ex.getToken());
         }
         // assertions
+        verifyAll();
+    }
+
+    @Test
+    public void testGetByTokenWhenExists() {
+        resetAll();
+        // test data
+        final String token = UUID.randomUUID().toString();
+        final AccessToken accessToken = new AccessToken(token, DateTime.now().plusHours(7));
+        // expectations
+        expect(accessTokenRepository.findByToken(token)).andReturn(accessToken);
+        replayAll();
+        // test scenario
+        final AccessToken result = accessTokenService.getByToken(token);
+        // assertions
+        assertNotNull(result);
+        assertEquals(accessToken, result);
+        verifyAll();
     }
     //endregion
 

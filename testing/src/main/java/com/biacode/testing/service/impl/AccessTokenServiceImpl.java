@@ -36,10 +36,8 @@ public class AccessTokenServiceImpl implements AccessTokenService {
     public AccessToken getByToken(final String token) {
         assertTokenNotNull(token);
         final AccessToken accessToken = accessTokenRepository.findByToken(token);
-        if (accessToken == null) {
-            throw new AccessTokenNotFoundForToken("Can not find access token", token);
-        }
-        return null;
+        assertAccessTokenNotNullForToken(token, accessToken);
+        return accessToken;
     }
     //endregion
 
@@ -59,6 +57,12 @@ public class AccessTokenServiceImpl implements AccessTokenService {
     private void assertTokenNotNull(final String token) {
         if (token == null) {
             throw new IllegalArgumentException("The access token should not be null");
+        }
+    }
+
+    private void assertAccessTokenNotNullForToken(final String token, final AccessToken accessToken) {
+        if (accessToken == null) {
+            throw new AccessTokenNotFoundForToken("Can not find access token", token);
         }
     }
     //endregion
