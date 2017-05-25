@@ -110,7 +110,7 @@ cargo publish
 ```
 
 [Crates.io](https://crates.io/) is a centralized rust community’s packages repository.\
-Already 151,554,732 Downloads and 9,286 crates.
+Already **151,554,732** Downloads and **9,286** crates.
 
 In fact the amount of downloads is not exact.
 
