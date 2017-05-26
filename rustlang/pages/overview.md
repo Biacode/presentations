@@ -10,20 +10,20 @@
 ---
 
 # About me
-**Author:** Arthur Asatryan  
-Software Engineer at SFL LLC.  
-**Email:** biacoder@gmail.com  
-**GitHub:** [https://github.com/Biacode](biacoder@gmail.com)  
-**Twitter:** [https://twitter.com/biacode](https://twitter.com/biacode)  
-**Linkedin:** [https://www.linkedin.com/in/arthur-asatryan/](https://www.linkedin.com/in/arthur-asatryan/)  
+**Author:** Arthur Asatryan <br/>
+Software Engineer at SFL LLC. <br/>
+**Email:** biacoder@gmail.com <br/>
+**GitHub:** [https://github.com/Biacode](biacoder@gmail.com) <br/>
+**Twitter:** [https://twitter.com/biacode](https://twitter.com/biacode) <br/>
+**Linkedin:** [https://www.linkedin.com/in/arthur-asatryan/](https://www.linkedin.com/in/arthur-asatryan/) <br/>  
 
 ---
 
 # What is rust?
-Rust is a modern systems programming language focusing on safety, speed, and concurrency.  
-It accomplishes these goals by being memory safe without using garbage collection.  
-In current IT sphere, you have safety or more control.  
-Rust has both, safety and control in the same place.  
+Rust is a modern systems programming language focusing on safety, speed, and concurrency. <br/>
+It accomplishes these goals by being memory safe without using garbage collection. <br/>
+In current IT sphere, you have safety or more control. <br/>
+Rust has both, safety and control in the same place. <br/>
 
 ---
 
@@ -53,7 +53,7 @@ Rust has both, safety and control in the same place.
 ---
 
 # Simple Installation
-Go to [https://www.rustup.rs](https://www.rustup.rs)  
+Go to [https://www.rustup.rs](https://www.rustup.rs) <br/>
 which suggests to copy and paste `curl https://sh.rustup.rs -sSf | sh` to your terminal.
 
 ---
@@ -71,8 +71,8 @@ The rustup brings
 ---
 
 # Cargo package manager
-[crates.io](https://crates.io/) the Rust community’s crate host.
-* Unified tool and central repository for entire rust community.
+[crates.io](https://crates.io/) the Rust community’s crate host. <br/>
+* Unified tool and central repository for entire rust community. 
 * Easy to use and very intuitive CLI commands.
 * Build, execute, test, benchmark and publish bin or lib projects.
 
@@ -110,8 +110,8 @@ log = "0.3"
 ---
 
 # crates.io is a centralized rust community’s packages repository.
-Already **151,554,732** Downloads and **9,286** crates.
-In fact the amount of downloads is not exact.
+Already **151,554,732** Downloads and **9,286** crates. <br/>
+In fact the amount of downloads is not exact. <br/>
 
 ---
 
@@ -132,7 +132,7 @@ cargo publish
 ---
 
 # Documentation
-The rust documentation is really differs from your know language documentations:
+The rust documentation is really differs from your know language documentations
 * Markdown support.
 * Compile time checks.
 * Unified host for all open source libs documentations.
@@ -254,7 +254,7 @@ error: `boo` does not live long enough
 ---
 
 # Memory management
-Rust has fine-grained memory management.  
+Rust has fine-grained memory management. <br/>
 And because of borrowing and ownership, it becomes automatically managed.
 
 # The heap allocated variables.
@@ -330,10 +330,10 @@ error[E0502]: cannot borrow `user_vec` as mutable because it is also borrowed as
 ---
 
 # Concurrency
-Mutable state is not bad.  
-Shared immutable state is not bad.  
-Shared mutable state is bad.  
-Ownership and borrowing _by default_ prevents data races  
+Mutable state is not bad. <br/>
+Shared immutable state is not bad. <br/>
+Shared mutable state is bad. <br/>
+Ownership and borrowing _by default_ prevents data races.
 
 ---
 
@@ -643,4 +643,4 @@ Lot of topics are not covered yet. Like
 
 # Thanks
 Special thanks to [Rust Community](https://users.rust-lang.org/t/rust-presentation-review/10858/2) and others for review.  
-For the slides i've used [RemarkJS](https://remarkjs.com/)
+Slideshow created using [RemarkJS](https://remarkjs.com/)
