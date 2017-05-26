@@ -137,7 +137,28 @@ The rust documentation is really differs from your know language documentations
 * Compile time checks.
 * Unified host for all open source libs documentations.
 * Examples are everywhere.
-* to be continued...
+
+---
+
+To generate rust doc simply execute command
+```bash
+cargo doc
+```
+Example code
+```rust
+/// Constructs a new `Rc<T>`.
+///
+/// # Examples
+///
+/// ` ` `
+/// use std::rc::Rc;
+///
+/// let five = Rc::new(5);
+/// ` ` `
+pub fn new(value: T) -> Rc<T> {
+    // Implementation goes here.
+}
+```
 
 ---
 
@@ -164,7 +185,7 @@ fn consume_user(user: User) {
     println!("user = {:?}", user);
 }
 ```
-Output
+
 ```text
 error[E0382]: use of moved value: `user`
  --> examples/tests.rs:7:29
@@ -174,7 +195,8 @@ error[E0382]: use of moved value: `user`
 7 |     println!("user = {:?}", user); // error occurs here (trying to access moved variable)
   |                             ^^^^ value used here after move
   |
-  = note: move occurs because `user` has type `User`, which does not implement the `Copy` trait
+  = note: move occurs because `user` has type `User`,
+  which does not implement the `Copy` trait
 ```
 
 ---
@@ -237,7 +259,7 @@ fn main() {
     println!("foo = {:?}", foo);
 }
 ```
-Output
+
 ```text
 error: `boo` does not live long enough
   --> examples/tests.rs:11:5
@@ -256,6 +278,8 @@ error: `boo` does not live long enough
 # Memory management
 Rust has fine-grained memory management. <br/>
 And because of borrowing and ownership, it becomes automatically managed.
+
+---
 
 # The heap allocated variables.
 **NOTE:** We're using experimental features here
@@ -314,7 +338,7 @@ fn main() {
     user_vec.push(User { age: 35 }); // ok here
 }
 ```
-Output
+
 ```text
 error[E0502]: cannot borrow `user_vec` as mutable because it is also borrowed as immutable
   --> examples/tests.rs:10:9
@@ -364,9 +388,10 @@ fn main() {
     });
 }
 ```
-Output
+
 ```text
-closure may outlive the current function, but it borrows `user`, which is owned by the current function
+closure may outlive the current function, but it borrows `user`,
+which is owned by the current function
 ```
 
 ---
@@ -440,23 +465,6 @@ fn produce_user() -> User {
 # Testing
 There is built in testing framework
 ```rust
-#[derive(Debug, Copy, Clone)]
-struct User {
-    age: u8
-}
-
-impl User {
-    fn new(age: u8) -> Self {
-        User {
-            age: age
-        }
-    }
-
-    fn get_age(&self) -> u8 {
-        self.age
-    }
-}
-
 #[cfg(test)]
 mod tests {
 
@@ -496,14 +504,19 @@ The attribute `cfg` allows to compile code based on passed flags
 #[cfg(any(not(unix), all(target_os="macos", target_arch = "powerpc")))]
 ```
 
-Even custom attributes predefined in `.toml` file
+---
+
+# Custom attributes predefined in `.toml` file
 ```toml
 [features]
 default = []
 
 foo = []
 ```
-or from CLI
+
+---
+
+# Or from CLI
 ```bash
 --cfg feature="${feature_name}"
 ```
@@ -517,33 +530,11 @@ mod foo {
 
 ---
 
-# Documentation
-To generate rust doc simply execute command
-```bash
-cargo doc
-```
-
-rustdoc supports `Markdown`
-```rust
-/// Constructs a new `Rc<T>`.
-///
-/// # Examples
-///
-/// ```
-/// use std::rc::Rc;
-///
-/// let five = Rc::new(5);
-/// ```
-pub fn new(value: T) -> Rc<T> {
-    // Implementation goes here.
-}
-```
+# FFI - Foreign Function Interface
+Rust can use C bindings <br/>
+Currently no support for C++ ABI.
 
 ---
-
-# FFI - Foreign Function Interface
-Rust can use C bindings  
-Currently no support for C++ ABI.
 
 # Rust can be easily embedded in to other languages
 * C
