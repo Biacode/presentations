@@ -24,653 +24,652 @@
 </head>
 <body>
 <textarea id="source">
-  # Rust for the impatient
-  ```text
-    ____       _      ____     ____      _      __  __   ____
-   | __ )     / \    |  _ \   / ___|    / \    |  \/  | |  _ \
-   |  _ \    / _ \   | |_) | | |       / _ \   | |\/| | | |_) |
-   | |_) |  / ___ \  |  _ <  | |___   / ___ \  | |  | | |  __/
-   |____/  /_/   \_\ |_| \_\  \____| /_/   \_\ |_|  |_| |_|
-  ```
-
-  ---
-
-  # About me
-  **Author:** Arthur Asatryan<br />
-  Software Engineer at SFL LLC.<br />
-  **Email:** biacoder@gmail.com<br />
-  **GitHub:** [https://github.com/Biacode](biacoder@gmail.com)<br/>
-  **Twitter:** [https://twitter.com/biacode](https://twitter.com/biacode)<br/>
-  **Linkedin:** [https://www.linkedin.com/in/arthur-asatryan/](https://www.linkedin.com/in/arthur-asatryan/)
-
-  ---
-
-  # What is rust?
-  Rust is a modern systems programming language focusing on safety, speed, and concurrency.
-  It accomplishes these goals by being memory safe without using garbage collection.
-  In current IT sphere, you have safety or more control.
-  Rust has both, safety and control in the same place.
-
-  ---
-
-  # Why rust is so amazing?
-  * First of all - **Amazing** Community.
-  * Extremely open development process.
-  * The community can be part of decisions in [RFC](https://github.com/rust-lang/rfcs)
-  * Supports functional and imperative-procedural paradigms.
-  * Gives you safety.
-  * More close to the bare metal.
-  * Does not have garbage collector.
-  * Have very small runtime.
-  * LLVM backend and optimizations.
-  * Statically typed.
-  * Move semantics.
-  * Zero cost abstractions.
-  * No segfaults.
-  * No dangling pointers.
-  * No null pointers.
-  * No iterator invalidation problems.
-  * No data races.
-  * Is used to develop [servo](https://en.wikipedia.org/wiki/Servo_(layout_engine)) browser.
-  * Rust won first place for "most loved programming language" in the [Stack Overflow Developer Survey in 2016 and 2017.](https://insights.stackoverflow.com/survey/2017#most-loved-dreaded-and-wanted)
-  * Benchmarks at [Benchmarksgame](https://benchmarksgame.alioth.debian.org/u64q/compare.php?lang=rust&lang2=gpp)
-  * [Who uses rust.](https://www.rust-lang.org/en-US/friends.html)
-
-  ---
-
-  # Simple Installation
-  Go to [https://www.rustup.rs](https://www.rustup.rs)
-  which suggests to copy and paste `curl https://sh.rustup.rs -sSf | sh` to your terminal.
-
-  ---
-
-  # The rustup toolchain
-  The rustup brings
-  * The rust programming language itself such as standard library etc...
-  * `rustc` - The rust-lang compiler.
-  * `rustup` - The CLI tool which helps to change language distribution channels like `stable`, `beta`, `nightly` and not only.
-  * `rustdoc` - The rust documentation generator.
-  * `rust-gdb` and `rust-lldb` debuggers.
-  * `cargo` - The [cargo](https://crates.io/) package manager.
-  * Testing tools and such.
-
-  ---
-
-  # Cargo package manager
-  [crates.io](https://crates.io/) the Rust community’s crate host.
-  * Unified tool and central repository for entire rust community.
-  * Easy to use and very intuitive CLI commands.
-  * Build, execute, test, benchmark and publish bin or lib projects.
-
-  ---
-
-  # Example `.toml` file
-  ```toml
-  [package]
-  name = "docker4rs"
-  version = "0.0.1"
-  authors = ["Arthur Asatryan <biacoder@gmail.com>"]
-  description = "Docker REST API implementation"
-  documentation = "https://docs.rs/docker4rs"
-  homepage = "https://github.com/Biacode/docker4rs"
-  repository = "https://github.com/Biacode/docker4rs"
-  keywords = ["docker", "rest", "api", "client"]
-  readme = "README.md"
-  license = "Apache-2.0"
-  exclude = [
-      ".travis.yml",
-      ".gitignore",
-  ]
-
-  [lib]
-  name = "docker4rs"
-  path = "src/lib.rs"
-
-  [dependencies]
-  hyper = "0.9"
-  serde = "0.8"
-  serde_json = "0.8"
-  serde_derive = "0.8"
-  log = "0.3"
-  ```
-  ---
-
-  # crates.io is a centralized rust community’s packages repository.
-  Already **151,554,732** Downloads and **9,286** crates.
-  In fact the amount of downloads is not exact.
-
-  ---
-
-  # The publishing crates is really simple.
-  1. login to crates.io using your access token from dashboard.
-  ```bash
-  cargo login abcdefghijklmnopqrstuvwxyz012345
-  ```
-  2. Package your lib/bin distribution.
-  ```bash
-  cargo package
-  ```
-  3. And finally publish it to crates.io
-  ```bash
-  cargo publish
-  ```
-
-  ---
-
-  # Documentation
-  The rust documentation is really differs from your know language documentations:
-  * Markdown support.
-  * Compile time checks.
-  * Unified host for all open source libs documentations.
-  * Examples are everywhere.
-  * to be continued...
-
-  ---
-
-  # Language semantics
-  * Ownership.
-  * Borrowing.
-  * Life times.
-
-  ---
-
-  # Ownership
-  There is only one owner of the data at the same time.
-  ```rust
-  #[derive(Debug)]
-  struct User(u32);
-
-  fn main() {
-      let user = User(46); // the owner is main function
-      consume_user(user); // user moved to the `consume_user` function
-      println!("user = {:?}", user); // error occurs here (trying to access moved variable)
-  }
-
-  fn consume_user(user: User) {
-      println!("user = {:?}", user);
-  }
-  ```
-  Output
-  ```text
-  error[E0382]: use of moved value: `user`
-   --> examples/tests.rs:7:29
-    |
-  6 |     consume_user(user); // user moved to the `consume_user` function
-    |                  ---- value moved here
-  7 |     println!("user = {:?}", user); // error occurs here (trying to access moved variable)
-    |                             ^^^^ value used here after move
-    |
-    = note: move occurs because `user` has type `User`, which does not implement the `Copy` trait
-  ```
-
-  ---
-
-  # Copy trait
-  ```rust
-  #[derive(Debug, Clone, Copy)]
-  struct User(u32);
-
-  fn main() {
-      let user = User(46);
-      consume_user(user); // No move. Instead we're passing copy of the user
-      println!("user = {:?}", user);
-  }
-
-  fn consume_user(user: User) {
-      println!("user = {:?}", user);
-  }
-  ```
-
-  ---
-
-  # There is only one reference pointer to the data at a time
-  ```rust
-  fn main() {
-      let mut age = 18;
-      let foo = &mut age;
-      let boo = &mut age; // error - cannot borrow `age` as mutable more than once at a time
-  }
-  ```
-
-  ---
-
-  # Borrowing
-  ```rust
-  #[derive(Debug)]
-  struct User(u32);
-
-  fn main() {
-      let user = User(46);
-      consume_user(&user); // passing reference of the user (reference borrowing)
-      println!("user = {:?}", user);
-  }
-
-  fn consume_user(user: &User) {
-      println!("user = {:?}", user);
-  }
-  ```
-
-  ---
-
-  # Lifetime
-  ```rust
-  fn main() {
-      let mut foo: &u32;
-      {
-          let boo = 40_u32;
-          foo = &boo; // borrowing reference, but `foo` goes out of scope
-      }
-      println!("foo = {:?}", foo);
-  }
-  ```
-  Output
-  ```text
-  error: `boo` does not live long enough
-    --> examples/tests.rs:11:5
-     |
-  10 |         foo = &boo;
-     |                --- borrow occurs here
-  11 |     }
-     |     ^ `boo` dropped here while still borrowed
-  12 |     println!("foo = {:?}", foo);
-  13 | }
-     | - borrowed value needs to live until here
-  ```
-
-  ---
-
-  # Memory management
-  Rust has fine-grained memory management.
-  And because of borrowing and ownership, it becomes automatically managed.
-
-  # The heap allocated variables.
-  **NOTE:** We're using experimental features here
-  ```rust
-  #![feature(box_syntax)]
-
-  struct User {
-      age: u32
-  }
-
-  fn main() {
-      let user = box User { age: 35 };
-  } // user goes out of scope
-  ```
-
-  ---
-
-  # Reference counting for shared memory
-  ```rust
-  use std::rc::Rc;
-
-  #[derive(Debug)]
-  struct User {
-      age: u32
-  }
-
-  fn main() {
-      let user = Rc::new(User { age: 26 }); // ref count 1
-      {
-          let user_clone = user.clone(); // ref count 2
-          consume_user(user_clone);
-      } // ref count 1
-      consume_user(user.clone()); // move
-  } // ref count 0
-
-  fn consume_user(user: Rc<User>) {
-      println!("user = {:?}", user);
-  }
-  ```
-
-  ---
-
-  # Avoiding iterator invalidation
-  ```rust
-  #[derive(Debug)]
-  struct User {
-      age: u32
-  }
-
-  fn main() {
-      let mut user_vec = Vec::new();
-      {
-          let immut_borrow_user = &user_vec;
-          user_vec.push(User { age: 18 }); // error
-      }
-      user_vec.push(User { age: 35 }); // ok here
-  }
-  ```
-  Output
-  ```text
-  error[E0502]: cannot borrow `user_vec` as mutable because it is also borrowed as immutable
-    --> examples/tests.rs:10:9
-     |
-  9  |         let immut_borrow_user = &user_vec;
-     |                                  -------- immutable borrow occurs here
-  10 |         user_vec.push(User { age: 18 });
-     |         ^^^^^^^^ mutable borrow occurs here
-  11 |     }
-     |     - immutable borrow ends here
-  ```
-
-  ---
-
-  # Concurrency
-  Mutable state is not bad.
-  Shared immutable state is not bad.
-  Shared mutable state is bad.
-  Ownership and borrowing _by default_ prevents data races
-
-  ---
-
-  # No shared data, no mutable state
-  ```rust
-  use std::thread;
-
-  fn main() {
-      thread::spawn(|| {
-          println!("Hello, World!");
-      });
-  }
-  ```
-
-  ---
-
-  # Shared mutable state
-  ```rust
-  #[derive(Debug)]
-  struct User {
-      age: u32
-  }
-
-  fn main() {
-      let mut user = vec![];
-      std::thread::spawn(|| {
-          user.push(User { age: 45 })
-      });
-  }
-  ```
-  Output
-  ```text
-  closure may outlive the current function, but it borrows `user`, which is owned by the current function
-  ```
-
-  ---
-
-  # `move` keyword moves the closure environment
-  ```rust
-  #[derive(Debug)]
-  struct User {
-      age: u32
-  }
-
-  fn main() {
-      let mut user = vec![];
-      std::thread::spawn(move || {
-          user.push(User { age: 45 })
-      });
-      user.push(User { age: 17 }) // COMPILE error - use of moved value: `user`
-  }
-  ```
-
-  ---
-
-  # Threads can communicate through channels
-  ```rust
-  #[derive(Debug)]
-  struct User {
-      age: u32
-  }
-
-  fn main() {
-      let (tx, rx) = std::sync::mpsc::channel();
-      std::thread::spawn(move || {
-          tx.send(produce_user())
-      });
-      let recv_user: Result<User, _> = rx.recv();
-      println!("recv_user = {:?}", recv_user.ok().unwrap());
-  }
-
-  fn produce_user() -> User {
-      User { age: 15 }
-  }
-  ```
-
-  ---
-
-  # Shared state with `Arc` - Atomic Reference Counter
-  ```rust
-  #[derive(Debug)]
-  struct User {
-      age: u32
-  }
-
-  fn main() {
-      let user = std::sync::Arc::new(produce_user());
-      let user_c = user.clone();
-      for i in 1..10 {
-          let user_c = user.clone();
-          std::thread::spawn(move || {
-              println!("user_c = {:?}", user_c)
-          });
-      }
-  }
-
-  fn produce_user() -> User {
-      User { age: 15 }
-  }
-  ```
-
-  ---
-
-  # Testing
-  There is built in testing framework
-  ```rust
-  #[derive(Debug, Copy, Clone)]
-  struct User {
-      age: u8
-  }
-
-  impl User {
-      fn new(age: u8) -> Self {
-          User {
-              age: age
-          }
-      }
-
-      fn get_age(&self) -> u8 {
-          self.age
-      }
-  }
-
-  #[cfg(test)]
-  mod tests {
-
-      use super::*;
-
-      #[test]
-      fn user_age() {
-          let user = User::new(35);
-          assert_eq!(35, user.get_age());
-      }
-
-      #[test]
-      #[ignore]
-      fn expensive_test() {
-          // Code that takes an hour to run...
-      }
-
-      #[test]
-      #[should_panic(expected = "assertion failed")]
-      fn it_works() {
-          assert_eq!("Hello", "world");
-      }
-  }
-  ```
-
-  ---
-
-  # Conditional compilation
-  The attribute `cfg` allows to compile code based on passed flags
-  ```rust
-  #[cfg(any(unix, windows))]
-
-  #[cfg(all(unix, target_pointer_width = "32"))]
-
-  #[cfg(not(foo))]
-
-  #[cfg(any(not(unix), all(target_os="macos", target_arch = "powerpc")))]
-  ```
-
-  Even custom attributes predefined in `.toml` file
-  ```toml
-  [features]
-  default = []
-
-  foo = []
-  ```
-  or from CLI
-  ```bash
-  --cfg feature="${feature_name}"
-  ```
-
-  And use them from code
-  ```rust
-  #[cfg(feature = "foo")]
-  mod foo {
-  }
-  ```
-
-  ---
-
-  # Documentation
-  To generate rust doc simply execute command
-  ```bash
-  cargo doc
-  ```
-
-  rustdoc supports `Markdown`
-  ```rust
-  /// Constructs a new `Rc<T>`.
-  ///
-  /// # Examples
-  ///
-  /// ```
-  /// use std::rc::Rc;
-  ///
-  /// let five = Rc::new(5);
-  /// ```
-  pub fn new(value: T) -> Rc<T> {
-      // Implementation goes here.
-  }
-  ```
-
-  ---
-
-  # FFI - Foreign Function Interface
-  Rust can use C bindings
-  Currently no support for C++ ABI.
-
-  # Rust can be easily embedded in to other languages
-  * C
-  * C++
-  * Erlang
-  * Haskell
-  * Java
-  * Lua
-  * Ruby
-  * Node.js
-  * Objective-C
-  * Python
-  * R
-
-  ---
-
-  ### Web stack libraries
-  * Web framework - [Rocket](https://rocket.rs/)
-  * ORM - [Diesel](http://diesel.rs/)
-  * Serialize/Deserialize - [Serde](https://serde.rs/)
-
-  ---
-
-  ### Logging
-  * Logging - [Simple Logging Facade](https://github.com/rust-lang-nursery/log)
-  * Log4Rs - [log4rs](https://github.com/sfackler/log4rs)
-
-  ---
-
-  ### Game dev
-  * Piston game engine - [piston](http://www.piston.rs/)
-  * Amethyst game engine - [amethyst](https://www.amethyst.rs/)
-
-  ---
-
-  ### Others
-  * OS - [Redox](https://www.redox-os.org/)
-  * GPU rendering terminal - [Alacritty](https://github.com/jwilm/alacritty)
-  * ANSI term - [rust-ansi-term](https://github.com/ogham/rust-ansi-term)
-  * Terminal colors - [colored](https://github.com/mackwic/colored)
-
-  ---
-
-  # See a lot more at [awesomerust](https://github.com/kud1ing/awesome-rust)
-
-  ---
-
-  ### Summary
-  **Pros**
-  * Amazing community.
-  * Very fast.
-  * Concurrent.
-  * Functional.
-  * Makes system lvl programming fun.
-  * Easy embedding into other languages.
-
-  ---
-
-  **Cons**
-  * There is no such libraries which are passed their proof of concept for a long run.
-  * The existing libraries in most cases have no stable / immutable API yet.
-  Cargo as well as Rust lang itself using [Semantic Versioning](http://semver.org) principle
-  * The language itself is not newbie friendly, and it takes decent learning course.
-  * No real books, only documentation and article pages.
-  Although the docs are amazing (also there is milestone to publish first rust book).
-  * Horrendous compile time (but incremental compilation coming).
-
-  ---
-
-  ### Useful links
-  * [Documentation](https://www.rust-lang.org/en-US/documentation.html)
-  * [Gitter](https://gitter.im/rust-lang/rust)
-  * [Forum](https://users.rust-lang.org/)
-  * [Are we web yet?](http://www.arewewebyet.org/)
-  * [Play Rust](https://play.rust-lang.org/)
-
-  ---
-
-  # Future read
-  Lot of topics are not covered yet. Like
-  * Macro
-  * Generics
-  * Functional programming
-  * Match expressions
-  * Tuple
-  * Expressions
-  * Error handling
-  * Option
-  * Result
-  * Closures in depth
-  * Traits
-  * Std library
-  * Unsafe operations
-  * etc...
-
-  ---
-
-  # Thanks
-  Special thanks to [Rust Community](https://users.rust-lang.org/t/rust-presentation-review/10858/2) and others for review.
-  Slideshow created using [RemarkJS](https://remarkjs.com/)
-
+# Rust for the impatient
+```text
+  ____       _      ____     ____      _      __  __   ____
+ | __ )     / \    |  _ \   / ___|    / \    |  \/  | |  _ \
+ |  _ \    / _ \   | |_) | | |       / _ \   | |\/| | | |_) |
+ | |_) |  / ___ \  |  _ <  | |___   / ___ \  | |  | | |  __/
+ |____/  /_/   \_\ |_| \_\  \____| /_/   \_\ |_|  |_| |_|
+```
+
+---
+
+# About me
+**Author:** Arthur Asatryan <br/>
+Software Engineer at SFL LLC. <br/>
+**Email:** biacoder@gmail.com <br/>
+**GitHub:** [https://github.com/Biacode](biacoder@gmail.com) <br/>
+**Twitter:** [https://twitter.com/biacode](https://twitter.com/biacode) <br/>
+**Linkedin:** [https://www.linkedin.com/in/arthur-asatryan/](https://www.linkedin.com/in/arthur-asatryan/) <br/>
+
+---
+
+# What is rust?
+Rust is a modern systems programming language focusing on safety, speed, and concurrency. <br/>
+It accomplishes these goals by being memory safe without using garbage collection. <br/>
+In current IT sphere, you have safety or more control. <br/>
+Rust has both, safety and control in the same place. <br/>
+
+---
+
+# Why rust is so amazing?
+* First of all - **Amazing** Community.
+* Extremely open development process.
+* The community can be part of decisions in [RFC](https://github.com/rust-lang/rfcs)
+* Supports functional and imperative-procedural paradigms.
+* Gives you safety.
+* More close to the bare metal.
+* Does not have garbage collector.
+* Have very small runtime.
+* LLVM backend and optimizations.
+* Statically typed.
+* Move semantics.
+* Zero cost abstractions.
+* No segfaults.
+* No dangling pointers.
+* No null pointers.
+* No iterator invalidation problems.
+* No data races.
+* Is used to develop [servo](https://en.wikipedia.org/wiki/Servo_(layout_engine)) browser.
+* Rust won first place for "most loved programming language" in the [Stack Overflow Developer Survey in 2016 and 2017.](https://insights.stackoverflow.com/survey/2017#most-loved-dreaded-and-wanted)
+* Benchmarks at [Benchmarksgame](https://benchmarksgame.alioth.debian.org/u64q/compare.php?lang=rust&lang2=gpp)
+* [Who uses rust.](https://www.rust-lang.org/en-US/friends.html)
+
+---
+
+# Simple Installation
+Go to [https://www.rustup.rs](https://www.rustup.rs) <br/>
+which suggests to copy and paste `curl https://sh.rustup.rs -sSf | sh` to your terminal.
+
+---
+
+# The rustup toolchain
+The rustup brings
+* The rust programming language itself such as standard library etc...
+* `rustc` - The rust-lang compiler.
+* `rustup` - The CLI tool which helps to change language distribution channels like `stable`, `beta`, `nightly` and not only.
+* `rustdoc` - The rust documentation generator.
+* `rust-gdb` and `rust-lldb` debuggers.
+* `cargo` - The [cargo](https://crates.io/) package manager.
+* Testing tools and such.
+
+---
+
+# Cargo package manager
+[crates.io](https://crates.io/) the Rust community’s crate host. <br/>
+* Unified tool and central repository for entire rust community.
+* Easy to use and very intuitive CLI commands.
+* Build, execute, test, benchmark and publish bin or lib projects.
+
+---
+
+# Example `.toml` file
+```toml
+[package]
+name = "docker4rs"
+version = "0.0.1"
+authors = ["Arthur Asatryan <biacoder@gmail.com>"]
+description = "Docker REST API implementation"
+documentation = "https://docs.rs/docker4rs"
+homepage = "https://github.com/Biacode/docker4rs"
+repository = "https://github.com/Biacode/docker4rs"
+keywords = ["docker", "rest", "api", "client"]
+readme = "README.md"
+license = "Apache-2.0"
+exclude = [
+    ".travis.yml",
+    ".gitignore",
+]
+
+[lib]
+name = "docker4rs"
+path = "src/lib.rs"
+
+[dependencies]
+hyper = "0.9"
+serde = "0.8"
+serde_json = "0.8"
+serde_derive = "0.8"
+log = "0.3"
+```
+---
+
+# crates.io is a centralized rust community’s packages repository.
+Already **151,554,732** Downloads and **9,286** crates. <br/>
+In fact the amount of downloads is not exact. <br/>
+
+---
+
+# The publishing crates is really simple.
+1. login to crates.io using your access token from dashboard.
+```bash
+cargo login abcdefghijklmnopqrstuvwxyz012345
+```
+2. Package your lib/bin distribution.
+```bash
+cargo package
+```
+3. And finally publish it to crates.io
+```bash
+cargo publish
+```
+
+---
+
+# Documentation
+The rust documentation is really differs from your know language documentations
+* Markdown support.
+* Compile time checks.
+* Unified host for all open source libs documentations.
+* Examples are everywhere.
+* to be continued...
+
+---
+
+# Language semantics
+* Ownership.
+* Borrowing.
+* Life times.
+
+---
+
+# Ownership
+There is only one owner of the data at the same time.
+```rust
+#[derive(Debug)]
+struct User(u32);
+
+fn main() {
+    let user = User(46); // the owner is main function
+    consume_user(user); // user moved to the `consume_user` function
+    println!("user = {:?}", user); // error occurs here (trying to access moved variable)
+}
+
+fn consume_user(user: User) {
+    println!("user = {:?}", user);
+}
+```
+Output
+```text
+error[E0382]: use of moved value: `user`
+ --> examples/tests.rs:7:29
+  |
+6 |     consume_user(user); // user moved to the `consume_user` function
+  |                  ---- value moved here
+7 |     println!("user = {:?}", user); // error occurs here (trying to access moved variable)
+  |                             ^^^^ value used here after move
+  |
+  = note: move occurs because `user` has type `User`, which does not implement the `Copy` trait
+```
+
+---
+
+# Copy trait
+```rust
+#[derive(Debug, Clone, Copy)]
+struct User(u32);
+
+fn main() {
+    let user = User(46);
+    consume_user(user); // No move. Instead we're passing copy of the user
+    println!("user = {:?}", user);
+}
+
+fn consume_user(user: User) {
+    println!("user = {:?}", user);
+}
+```
+
+---
+
+# There is only one reference pointer to the data at a time
+```rust
+fn main() {
+    let mut age = 18;
+    let foo = &mut age;
+    let boo = &mut age; // error - cannot borrow `age` as mutable more than once at a time
+}
+```
+
+---
+
+# Borrowing
+```rust
+#[derive(Debug)]
+struct User(u32);
+
+fn main() {
+    let user = User(46);
+    consume_user(&user); // passing reference of the user (reference borrowing)
+    println!("user = {:?}", user);
+}
+
+fn consume_user(user: &User) {
+    println!("user = {:?}", user);
+}
+```
+
+---
+
+# Lifetime
+```rust
+fn main() {
+    let mut foo: &u32;
+    {
+        let boo = 40_u32;
+        foo = &boo; // borrowing reference, but `foo` goes out of scope
+    }
+    println!("foo = {:?}", foo);
+}
+```
+Output
+```text
+error: `boo` does not live long enough
+  --> examples/tests.rs:11:5
+   |
+10 |         foo = &boo;
+   |                --- borrow occurs here
+11 |     }
+   |     ^ `boo` dropped here while still borrowed
+12 |     println!("foo = {:?}", foo);
+13 | }
+   | - borrowed value needs to live until here
+```
+
+---
+
+# Memory management
+Rust has fine-grained memory management. <br/>
+And because of borrowing and ownership, it becomes automatically managed.
+
+# The heap allocated variables.
+**NOTE:** We're using experimental features here
+```rust
+#![feature(box_syntax)]
+
+struct User {
+    age: u32
+}
+
+fn main() {
+    let user = box User { age: 35 };
+} // user goes out of scope
+```
+
+---
+
+# Reference counting for shared memory
+```rust
+use std::rc::Rc;
+
+#[derive(Debug)]
+struct User {
+    age: u32
+}
+
+fn main() {
+    let user = Rc::new(User { age: 26 }); // ref count 1
+    {
+        let user_clone = user.clone(); // ref count 2
+        consume_user(user_clone);
+    } // ref count 1
+    consume_user(user.clone()); // move
+} // ref count 0
+
+fn consume_user(user: Rc<User>) {
+    println!("user = {:?}", user);
+}
+```
+
+---
+
+# Avoiding iterator invalidation
+```rust
+#[derive(Debug)]
+struct User {
+    age: u32
+}
+
+fn main() {
+    let mut user_vec = Vec::new();
+    {
+        let immut_borrow_user = &user_vec;
+        user_vec.push(User { age: 18 }); // error
+    }
+    user_vec.push(User { age: 35 }); // ok here
+}
+```
+Output
+```text
+error[E0502]: cannot borrow `user_vec` as mutable because it is also borrowed as immutable
+  --> examples/tests.rs:10:9
+   |
+9  |         let immut_borrow_user = &user_vec;
+   |                                  -------- immutable borrow occurs here
+10 |         user_vec.push(User { age: 18 });
+   |         ^^^^^^^^ mutable borrow occurs here
+11 |     }
+   |     - immutable borrow ends here
+```
+
+---
+
+# Concurrency
+Mutable state is not bad. <br/>
+Shared immutable state is not bad. <br/>
+Shared mutable state is bad. <br/>
+Ownership and borrowing _by default_ prevents data races.
+
+---
+
+# No shared data, no mutable state
+```rust
+use std::thread;
+
+fn main() {
+    thread::spawn(|| {
+        println!("Hello, World!");
+    });
+}
+```
+
+---
+
+# Shared mutable state
+```rust
+#[derive(Debug)]
+struct User {
+    age: u32
+}
+
+fn main() {
+    let mut user = vec![];
+    std::thread::spawn(|| {
+        user.push(User { age: 45 })
+    });
+}
+```
+Output
+```text
+closure may outlive the current function, but it borrows `user`, which is owned by the current function
+```
+
+---
+
+# `move` keyword moves the closure environment
+```rust
+#[derive(Debug)]
+struct User {
+    age: u32
+}
+
+fn main() {
+    let mut user = vec![];
+    std::thread::spawn(move || {
+        user.push(User { age: 45 })
+    });
+    user.push(User { age: 17 }) // COMPILE error - use of moved value: `user`
+}
+```
+
+---
+
+# Threads can communicate through channels
+```rust
+#[derive(Debug)]
+struct User {
+    age: u32
+}
+
+fn main() {
+    let (tx, rx) = std::sync::mpsc::channel();
+    std::thread::spawn(move || {
+        tx.send(produce_user())
+    });
+    let recv_user: Result<User, _> = rx.recv();
+    println!("recv_user = {:?}", recv_user.ok().unwrap());
+}
+
+fn produce_user() -> User {
+    User { age: 15 }
+}
+```
+
+---
+
+# Shared state with `Arc` - Atomic Reference Counter
+```rust
+#[derive(Debug)]
+struct User {
+    age: u32
+}
+
+fn main() {
+    let user = std::sync::Arc::new(produce_user());
+    let user_c = user.clone();
+    for i in 1..10 {
+        let user_c = user.clone();
+        std::thread::spawn(move || {
+            println!("user_c = {:?}", user_c)
+        });
+    }
+}
+
+fn produce_user() -> User {
+    User { age: 15 }
+}
+```
+
+---
+
+# Testing
+There is built in testing framework
+```rust
+#[derive(Debug, Copy, Clone)]
+struct User {
+    age: u8
+}
+
+impl User {
+    fn new(age: u8) -> Self {
+        User {
+            age: age
+        }
+    }
+
+    fn get_age(&self) -> u8 {
+        self.age
+    }
+}
+
+#[cfg(test)]
+mod tests {
+
+    use super::*;
+
+    #[test]
+    fn user_age() {
+        let user = User::new(35);
+        assert_eq!(35, user.get_age());
+    }
+
+    #[test]
+    #[ignore]
+    fn expensive_test() {
+        // Code that takes an hour to run...
+    }
+
+    #[test]
+    #[should_panic(expected = "assertion failed")]
+    fn it_works() {
+        assert_eq!("Hello", "world");
+    }
+}
+```
+
+---
+
+# Conditional compilation
+The attribute `cfg` allows to compile code based on passed flags
+```rust
+#[cfg(any(unix, windows))]
+
+#[cfg(all(unix, target_pointer_width = "32"))]
+
+#[cfg(not(foo))]
+
+#[cfg(any(not(unix), all(target_os="macos", target_arch = "powerpc")))]
+```
+
+Even custom attributes predefined in `.toml` file
+```toml
+[features]
+default = []
+
+foo = []
+```
+or from CLI
+```bash
+--cfg feature="${feature_name}"
+```
+
+And use them from code
+```rust
+#[cfg(feature = "foo")]
+mod foo {
+}
+```
+
+---
+
+# Documentation
+To generate rust doc simply execute command
+```bash
+cargo doc
+```
+
+rustdoc supports `Markdown`
+```rust
+/// Constructs a new `Rc<T>`.
+///
+/// # Examples
+///
+/// ```
+/// use std::rc::Rc;
+///
+/// let five = Rc::new(5);
+/// ```
+pub fn new(value: T) -> Rc<T> {
+    // Implementation goes here.
+}
+```
+
+---
+
+# FFI - Foreign Function Interface
+Rust can use C bindings
+Currently no support for C++ ABI.
+
+# Rust can be easily embedded in to other languages
+* C
+* C++
+* Erlang
+* Haskell
+* Java
+* Lua
+* Ruby
+* Node.js
+* Objective-C
+* Python
+* R
+
+---
+
+### Web stack libraries
+* Web framework - [Rocket](https://rocket.rs/)
+* ORM - [Diesel](http://diesel.rs/)
+* Serialize/Deserialize - [Serde](https://serde.rs/)
+
+---
+
+### Logging
+* Logging - [Simple Logging Facade](https://github.com/rust-lang-nursery/log)
+* Log4Rs - [log4rs](https://github.com/sfackler/log4rs)
+
+---
+
+### Game dev
+* Piston game engine - [piston](http://www.piston.rs/)
+* Amethyst game engine - [amethyst](https://www.amethyst.rs/)
+
+---
+
+### Others
+* OS - [Redox](https://www.redox-os.org/)
+* GPU rendering terminal - [Alacritty](https://github.com/jwilm/alacritty)
+* ANSI term - [rust-ansi-term](https://github.com/ogham/rust-ansi-term)
+* Terminal colors - [colored](https://github.com/mackwic/colored)
+
+---
+
+# See a lot more at [awesomerust](https://github.com/kud1ing/awesome-rust)
+
+---
+
+### Summary
+**Pros**
+* Amazing community.
+* Very fast.
+* Concurrent.
+* Functional.
+* Makes system lvl programming fun.
+* Easy embedding into other languages.
+
+---
+
+**Cons**
+* There is no such libraries which are passed their proof of concept for a long run.
+* The existing libraries in most cases have no stable / immutable API yet.
+Cargo as well as Rust lang itself using [Semantic Versioning](http://semver.org) principle
+* The language itself is not newbie friendly, and it takes decent learning course.
+* No real books, only documentation and article pages.
+Although the docs are amazing (also there is milestone to publish first rust book).
+* Horrendous compile time (but incremental compilation coming).
+
+---
+
+### Useful links
+* [Documentation](https://www.rust-lang.org/en-US/documentation.html)
+* [Gitter](https://gitter.im/rust-lang/rust)
+* [Forum](https://users.rust-lang.org/)
+* [Are we web yet?](http://www.arewewebyet.org/)
+* [Play Rust](https://play.rust-lang.org/)
+
+---
+
+# Future read
+Lot of topics are not covered yet. Like
+* Macro
+* Generics
+* Functional programming
+* Match expressions
+* Tuple
+* Expressions
+* Error handling
+* Option
+* Result
+* Closures in depth
+* Traits
+* Std library
+* Unsafe operations
+* etc...
+
+---
+
+# Thanks
+Special thanks to [Rust Community](https://users.rust-lang.org/t/rust-presentation-review/10858/2) and others for review. <br/>
+Slideshow created using [RemarkJS](https://remarkjs.com/)
 </textarea>
 <script src="js/remark-latest.min.js"></script>
 <script>

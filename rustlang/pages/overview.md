@@ -642,5 +642,5 @@ Lot of topics are not covered yet. Like
 ---
 
 # Thanks
-Special thanks to [Rust Community](https://users.rust-lang.org/t/rust-presentation-review/10858/2) and others for review.  
+Special thanks to [Rust Community](https://users.rust-lang.org/t/rust-presentation-review/10858/2) and others for review. <br/>  
 Slideshow created using [RemarkJS](https://remarkjs.com/)
