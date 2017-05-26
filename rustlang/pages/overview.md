@@ -437,7 +437,126 @@ fn produce_user() -> User {
 
 ---
 
-# FFI
+# Testing
+There is built in testing framework
+```rust
+#[derive(Debug, Copy, Clone)]
+struct User {
+    age: u8
+}
+
+impl User {
+    fn new(age: u8) -> Self {
+        User {
+            age: age
+        }
+    }
+
+    fn get_age(&self) -> u8 {
+        self.age
+    }
+}
+
+#[cfg(test)]
+mod tests {
+
+    use super::*;
+
+    #[test]
+    fn user_age() {
+        let user = User::new(35);
+        assert_eq!(35, user.get_age());
+    }
+
+    #[test]
+    #[ignore]
+    fn expensive_test() {
+        // Code that takes an hour to run...
+    }
+
+    #[test]
+    #[should_panic(expected = "assertion failed")]
+    fn it_works() {
+        assert_eq!("Hello", "world");
+    }
+}
+```
+
+---
+
+# Conditional compilation
+The attribute `cfg` allows to compile code based on passed flags
+```rust
+#[cfg(any(unix, windows))]
+
+#[cfg(all(unix, target_pointer_width = "32"))]
+
+#[cfg(not(foo))]
+
+#[cfg(any(not(unix), all(target_os="macos", target_arch = "powerpc")))]
+```
+
+Even custom attributes predefined in `.toml` file
+```toml
+[features]
+default = []
+
+foo = []
+```
+or from CLI
+```bash
+--cfg feature="${feature_name}"
+```
+
+And use them from code
+```rust
+#[cfg(feature = "foo")]
+mod foo {
+}
+```
+
+---
+
+# Documentation
+To generate rust doc simply execute command
+```bash
+cargo doc
+```
+
+rustdoc supports `Markdown`
+```rust
+/// Constructs a new `Rc<T>`.
+///
+/// # Examples
+///
+/// ```
+/// use std::rc::Rc;
+///
+/// let five = Rc::new(5);
+/// ```
+pub fn new(value: T) -> Rc<T> {
+    // Implementation goes here.
+}
+```
+
+---
+
+# FFI - Foreign Function Interface
+Rust can use C bindings  
+Currently no support for C++ ABI.
+
+# Rust can be easily embedded in to other languages
+* C
+* C++
+* Erlang
+* Haskell
+* Java
+* Lua
+* Ruby
+* Node.js
+* Objective-C
+* Python
+* R
 
 ---
 
@@ -455,7 +574,7 @@ fn produce_user() -> User {
 ---
 
 ### Game dev
-* Piston game engine - [pisto](http://www.piston.rs/)
+* Piston game engine - [piston](http://www.piston.rs/)
 * Amethyst game engine - [amethyst](https://www.amethyst.rs/)
 
 ---
@@ -500,6 +619,25 @@ Although the docs are amazing (also there is milestone to publish first rust boo
 * [Forum](https://users.rust-lang.org/)
 * [Are we web yet?](http://www.arewewebyet.org/)
 * [Play Rust](https://play.rust-lang.org/)
+
+---
+
+# Future read
+Lot of topics are not covered yet. Like
+* Macro
+* Generics
+* Functional programming
+* Match expressions
+* Tuple
+* Expressions
+* Error handling
+* Option
+* Result
+* Closures in depth
+* Traits
+* Std library
+* Unsafe operations
+* etc...
 
 ---
 
