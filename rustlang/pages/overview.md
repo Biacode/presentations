@@ -275,6 +275,23 @@ error: `boo` does not live long enough
 
 ---
 
+# Explicit lifetimes when dealing with struct that contains reference
+
+```rust
+struct Foo<'a> {
+    x: &'a i32,
+}
+
+fn main() {
+    let y = &5; // This is the same as `let _y = 5; let y = &_y;`.
+    let f = Foo { x: y };
+
+    println!("{}", f.x);
+}
+```
+
+---
+
 # Memory management
 Rust has fine-grained memory management. <br/>
 And because of borrowing and ownership, it becomes automatically managed.
