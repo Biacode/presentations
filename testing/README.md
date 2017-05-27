@@ -1,33 +1,39 @@
 # Testing for complete beginners
 
-```
-______    ___   ______   _____    ___   ___  ___ ______ 
-| ___ \  / _ \  | ___ \ /  __ \  / _ \  |  \/  | | ___ \
-| |_/ / / /_\ \ | |_/ / | /  \/ / /_\ \ | .  . | | |_/ /
-| ___ \ |  _  | |    /  | |     |  _  | | |\/| | |  __/ 
-| |_/ / | | | | | |\ \  | \__/\ | | | | | |  | | | |    
-\____/  \_| |_/ \_| \_|  \____/ \_| |_/ \_|  |_/ \_|    
-```
-### About me
-```
-Author: Arthur Asatryan
-Software Engineer at SFL LLC.
-Email: biacoder@gmail.com
-GitHub: https://github.com/Biacode
-Twitter: https://twitter.com/biacode
-Linkedin: https://www.linkedin.com/in/arthur-asatryan/
+```text
+  ____       _      ____     ____      _      __  __   ____  
+ | __ )     / \    |  _ \   / ___|    / \    |  \/  | |  _ \
+ |  _ \    / _ \   | |_) | | |       / _ \   | |\/| | | |_) |
+ | |_) |  / ___ \  |  _ <  | |___   / ___ \  | |  | | |  __/
+ |____/  /_/   \_\ |_| \_\  \____| /_/   \_\ |_|  |_| |_|    
 ```
 
-## Preface
+---
+
+# About me
+**Author:** Arthur Asatryan <br/>
+Software Engineer at SFL LLC. <br/>
+**Email:** biacoder@gmail.com <br/>
+**GitHub:** [https://github.com/Biacode](biacoder@gmail.com) <br/>
+**Twitter:** [https://twitter.com/biacode](https://twitter.com/biacode) <br/>
+**Linkedin:** [https://www.linkedin.com/in/arthur-asatryan/](https://www.linkedin.com/in/arthur-asatryan/) <br/>  
+
+---
+
+# Preface
 Sometimes new comers have some problems to understand essence of software testing.
 * Most of time they have no idea about how to get started.
 * Some don't know what benefits software testing gives them.
 * They need some really basic newbie guide to get started.
 * Some of them even think that the testing of **their own** application is not their business, because it's QA job.
 
-## Real world example
-Imagine situation when you need to investigate some library to deal with date and time.\
+---
+
+# Real world example
+Imagine situation when you need to investigate some library to deal with date and time. <br/>
 And you found that the [JodaTime](http://www.joda.org/joda-time/) is the best solution for you.
+
+---
 
 Let's say that you don't have existing project and starting from scratch.
 1. You'll open your favorite IDE (in my case it is IntelliJ)
@@ -35,111 +41,143 @@ Let's say that you don't have existing project and starting from scratch.
 3. Add joda-time dependency
 4. And the very first thing that you may want to do is writing a main method to test your new library while reading documentation etc...
 
-Let's say we're implementing user access token `AccessToken` which has expiration date.
+---
 
-Suppose we have business requirements that we should restrict access if the access token is expired.\
-We can write an `AccessTokenService` which will be responsible for checking if the given access token is expired or not.\
-If we dive in to joda-time docs, we can find method called `isBeforeNow` which is exactly what we need.\
+Let's say we're implementing user access token `AccessToken` which has expiration date. <br/>
+Suppose we have business requirements that we should restrict access if the access token is expired. <br/>
+We can write an `AccessTokenService` which will be responsible for checking if the given access token is expired or not. <br/>
+If we dive in to joda-time docs, we can find method called `isBeforeNow` which is exactly what we need. <br/>
 So after writing our first business logic we have following filling.
 
-* Is the joda lib. working correctly? (naive guy :D)
+---
+
+* Is the joda-time lib. working correctly? (naive guy :D)
 * Do I get it right? For beginners (and not only) the date operations are hard to understand.
 
-You will write some code in your `main` method to test it out.\
-Find working example in `MainApplication`\
+---
+
+You will write some code in your `main` method to test it out. <br/>
+Find working example in `MainApplication` <br/>
 If we run the application we will notice that the access token is not expired.
 
-So everything goes as expected.\
-Now if we want to push our code to production of course we don't want to have our main method there,
-which is only for testing purposes.\
+---
+
+So everything goes as expected. <br/>
+Now if we want to push our code to production of course we don't want to have our main method there <br/>
 But we also want to have it somewhere, so in future if we need experiment more with this `unit` of logic we will write it again.
 
-Here where the test package comes in.\
+---
+
+Here where the test package comes in. <br/>
 Any code written in this package will be excluded from production build.
 
-So let's create a new class called `AccessTokenServiceImplTest` in test package.
+---
 
-It would be nice if we can have some library/framework which will execute our `unit test`.\
+So let's create a new class called `AccessTokenServiceImplTest` in the test package.
+
+It would be nice if we can have some library/framework which will execute our `unit test`. <br/>
 We will use [junit](http://junit.org/junit4/faq.html#overview_1) for this purpose.
 
-Short about junit.
+---
 
-JUnit is a simple, open source framework to write and run repeatable tests. It is an instance of the xUnit architecture for unit testing frameworks. JUnit features include:
+# Short about junit.
+JUnit is a simple, open source framework to write and run repeatable tests.
 > * Assertions for testing expected results
 > * Test fixtures for sharing common test data
 > * Test runners for running tests
 > * JUnit was originally written by Erich Gamma and Kent Beck.
 
+---
+
 Now when we have some knowledge about junit framework let's write our first test.
 
-We can **and should** cover at lest three cases.\
-One case is when the access token is null (invalid arguments).\
-Next case is when access token is not expired.\
-And another one as you may already guess is the case when our access token is expired.
+We can **and should** cover at lest three cases. <br/>
+One case is when the access token is null (invalid arguments). <br/>
+Next case is when access token is not expired. <br/>
+And another one as you may already guess is the case when access token is expired.
 
-## TDD - Test Driven Development
+---
+
+# TDD - Test Driven Development
 So what is TDD?
+
+---
 
 In short, TDD is when your production code is driven by **test first** approach.
 
-TDD has 3 life cycles
+---
 
+# TDD has 3 life cycles
 * First we write failing test
-* Then we write code which somehow makes our failing test green.
+* Then we write code which _somehow_ makes our failing test green.
 * Then we make some refactoring.
 * Continue cycle.
 
-The benefits of this approach are
+---
 
+# The benefits of this approach are
 * We will not have any non covered code.
 * Because of our laziness we will write our system components as simple as possible.
 * We will make our components decoupled and test them separately.
 
 The list above is just small list of benefits which gives you TDD.
 
-## Real world example using TDD principles
-Suppose we need a new method which returns the remaining days before our token will be expired.\
-Let's call it `remainingDays`.\
-If we follow the TDD principles we will write failing test first.\
+---
+
+# Real world example using TDD principles
+Suppose we need a new method which returns the remaining days before our token will be expired. <br/>
+Let's call it `remainingDays`. <br/>
+If we follow the TDD principles we will write failing test first. <br/>
 We even have not written the `remainingDays` method in `AccessTokenService`
 
-First we would cover the case when the given access token is null.\
-Then we will check if the access token is expired and throw an `AccessTokenExpiredRuntimeException`.
-Then we will cover the case when the access token is not expired, and the remaining days are `7`.
+---
+
+First we would cover the case when the given access token is null. <br/>
+Then we will check if the access token is expired and throw an `AccessTokenExpiredRuntimeException`. <br/>
+Then we will cover the case when the access token is not expired, and the remaining days are `6`.
 
 Please see `AccessTokenServiceImplTest` for more details.
 
-## Mocking
-Now lets suppose we have to retrieve our access token from some kind of Database.\
-In case if we have relational database such as MySQL, we should have JDBC and/or Hibernate to work with our DB.\
-It means we will make lots of work just for testing our small application unit.\
+---
+
+# Mocking
+Now lets suppose we have to retrieve our access token from some kind of Database. <br/>
+In case if we have relational database such as MySQL, we should have JDBC and/or Hibernate to work with our DB. <br/>
+It means we will make lots of work just for testing our small application unit. <br/>
 Here where we need some framework, which will _Mock_ all implementation details, and return us exactly what we need.
 
 For this purpose we will use [easymock](http://easymock.org/).
 
-## Real world example using mocking principles
+---
+
+# Real world example using mocking principles
 So as before, we need some test to begin.
 
-Let's say we should retrieve our access token from the database by given token.\
-For this we can write some method called `getByToken` which will accept the `token` and return `AccessToken` from the database.\
-In terms of good architecture we will separate our DB lookup logic from service.\
-For this purpose let's create `AccessTokenRepository` interface with `findByToken` method,
-which accepts token and returns access token if it is found, otherwise it will return null.
+---
 
-We will cover following.
+Let's say we should retrieve our access token from the database by given token. <br/>
+For this we can write some method called `getByToken` which will accept the `token` and return `AccessToken` from the database. <br/>
+In terms of good architecture we will separate our DB lookup logic from service. <br/>
+For this purpose let's create `AccessTokenRepository` interface with `findByToken` method.
 
+---
+
+# We will cover following.
 * We're assuming that the token should not be null.
 * In terms of best practices, if our _repository_ can not find access token for given token,
-then our service method should not return null, instead it should throw an exception.\
+then our service method should not return null, instead it should throw an exception. <br/>
 **TIP:** _I personally prefer new Java 8 `Optional` to avoid nulls. But this is different story :)_
 * If the access token is found, then we will return it.
 
 Find future implementation in `AccessTokenServiceImplTest`
 
-# Conclusion
+---
 
+# Conclusion
 * Testing is not as hard as you think in the beginning. It's just normal flow as you're doing in your regular coding time.
 * TDD - Test Driven Development is really the way to go, it gives you lot of advantages.
 * Mocking helps you to abstract from particular technology / framework stack, instead you're just testing your business units.
 
-Thanks.
+---
+
+# Thanks

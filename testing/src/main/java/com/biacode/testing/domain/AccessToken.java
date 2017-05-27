@@ -8,7 +8,7 @@ import org.joda.time.DateTime;
  */
 public class AccessToken {
 
-    private String accessToken;
+    private String token;
 
     private DateTime expiration;
 
@@ -16,17 +16,17 @@ public class AccessToken {
         // Default constructor
     }
 
-    public AccessToken(final String accessToken, final DateTime expiration) {
-        this.accessToken = accessToken;
+    public AccessToken(final String token, final DateTime expiration) {
+        this.token = token;
         this.expiration = expiration;
     }
 
-    public String getAccessToken() {
-        return accessToken;
+    public String getToken() {
+        return token;
     }
 
-    public void setAccessToken(final String accessToken) {
-        this.accessToken = accessToken;
+    public void setToken(final String token) {
+        this.token = token;
     }
 
     public DateTime getExpiration() {
@@ -39,7 +39,7 @@ public class AccessToken {
 
     @Override
     public String toString() {
-        return "AccessToken{" + "accessToken='" + accessToken + '\'' +
+        return "AccessToken{" + "token='" + token + '\'' +
                 ", expiration=" + expiration +
                 '}';
     }
