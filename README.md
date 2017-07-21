@@ -19,13 +19,15 @@ Video - https://www.youtube.com/watch?v=nRHW9uKAaoo
 
 Location - SFL LLC
 
-### CloudCon Luxembourg
+### CloudCon
+
+Location - Luxembourg
 
 ### Rust for the impatient
 
 Conference - Barcamp
 
-Slides - https://biacode.github.io/presentations/rust-for-the-implatien
+Slides - https://biacode.github.io/presentations/rust-for-the-implatient/#1
 
 Video - https://www.youtube.com/watch?v=R5qywnLplKY&t=1641s
 
@@ -33,6 +35,6 @@ Video - https://www.youtube.com/watch?v=R5qywnLplKY&t=1641s
 
 Conference - Barcamp
 
-Slides/Repo - https://github.com/Biacode/presentations/tree/master/testing
+Slides/Repo - https://github.com/Biacode/presentations/tree/master/testing/#1
 
 Video - https://www.youtube.com/watch?v=ZK_LBSaX-ao
