@@ -17,7 +17,7 @@
     <properties>
         <source.jdk>1.8</source.jdk>
         <target.jdk>1.8</target.jdk>
-        <akka.version>2.3.12</akka.version>
+        <akka.version>2.5.31</akka.version>
     </properties>
 
     <dependencies>
