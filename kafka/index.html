@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style type="text/css">
+        /* Slideshow styles */
+    </style>
+    <title>Kafka</title>
+</head>
+<body>
+<textarea id="source">
+    class: middle, center
+
+    # Agenda
+    Get started with [Apache Kafka.](https://kafka.apache.org)
+
+    ---
+
+    layout: true
+
+    #### <img alt="Kafka Logo" src="img/kafka-logo.png" style="width:9px;"/> Get started with Apache Kafka
+
+    ---
+
+    ## What IS apache Kafka
+    Apache Kafka is
+    * open-source
+    * commit log based
+    * stream-processing
+    * fault tolerant storage
+    * written in scala and java
+    * highly distributed
+    * support of pub/sub and/or queue mechanisms
+    * horizontally scalable
+    * written in [scala and java](https://github.com/apache/kafka)
+
+    ---
+
+    ## Kafka Use Cases
+    * messaging
+    * user activity/behavior tracking
+    * stream processing
+    * event sourcing
+    * commit log for distributed systems
+
+    See [Use case](https://kafka.apache.org/uses)
+
+    ---
+
+    ## Who uses
+    * Pinterest
+    * Aidbnb
+    * Cisco
+    * Cloudflare
+    * LinkedIn
+
+    See [Powered by](https://kafka.apache.org/powered-by)
+
+    ---
+
+    ## History
+    * Open source since 2011 under Apache 2 license
+    * Originally developed by LinkedIn
+    * Currently maintained by Apache Software Foundation    
+
+    ---
+
+    ## Basic terminology
+    **Broker**
+    * A Kafka cluster consists of one or more servers (Kafka brokers) running Kafka
+        
+    **Record**
+    * Consists of key, value and timestamp
+
+    **Topic**
+    * Category/feed name to which records are stored and published
+
+    **Producer**
+    * Processes that push records into Kafka topics within the broker
+
+    **Consumer**
+    * Pulls records off a Kafka topic
+
+    ---
+
+    ## Architecture
+    ![](img/kafka-architecture.png)
+
+    ## Basic concepts
+
+    ---
+
+    ## Broker
+    Running a cluster with single Kafka broker is possible, but is not the prefered way.
+    
+
+    The main way to replicate your records across the cluster<br>
+    Management of the brokers in the cluster is performed by Zookeeper.<br>
+
+    ---
+
+    ## Zookeeper
+    [ZooKeeper](https://zookeeper.apache.org/) is a centralized service for
+    * naming
+    * maintaining configuration information
+    * providing distributed synchronization
+    * distributed process coordination
+    * distributed lock
+    * distributed consensus
+
+    There may be multiple Zookeepers in a cluster.<br>
+    Recommendation is three to five.<br>
+    Keeping an odd number so that there is always a majority.<br>
+
+    ---
+
+    ## Topic
+    * Kafka topic is the holder and organizer of the records
+
+    * Topic has it own configurations to manipulate with records lifecycle
+
+    * For instance, you can setup configurable retention period and retention policy
+
+    * Any records within the topic has its offset
+
+    ---
+
+    ## Topic partition
+    * Kafka topic can be divided into multiple partitions
+
+    * The partition itself keeps its own offset sequence
+
+    * In fact, the partitioning is the primary way of Kafka's parallelism
+
+    * In Kafka, replication is implemented at partition level
+
+    ---
+
+    ## Low level Consumer
+    * Consumer reads the messages from topic
+
+    * Records can be consumed from arbitrary offset, but the common scenarios are "earliest" and "latest"
+
+    * Configure isolation level with `isolation.level` property.
+
+    ---
+
+    ## High level consumer
+    * Handling current consumer offset in low level consumers are hard, so Kafka has a concept called Consumer Group.
+
+    * Multiple consumers can be grouped with Consumer Group.
+
+    * Kafka keeps that of the consumer group, like start offset, end offset, messages behind etc.
+
+    * Each time a new consumer joins the group, the consumptions is rebalanced.
+
+    * The main way of configuring consumption parallelism is the number of consumers itself.
+
+    * The topics are not pushing any notification to consumers, consumers are pulling images for their own.
+
+    * The Kafka consumer may have it's own configurations like isolation level, offset reset, auto commit, pool interval, timeout, batch size, etc.
+
+    ---
+
+    ## Consumer constraints
+    * Within the Consumer Group, at the given moment, only one consumer will be able to consume from the given partition
+
+    * With this in mind, the max number of parallel consumers is the number of partitions
+
+    * This way the consumer group will behave like queue
+
+    Consumers in different consumer groups will behave like pub/sub.
+
+    ---
+
+    ## Producer
+    Producer is the main way of pushing records to the Kafka topic.
+
+    When the record published via producer, first it will be placed in leader partition, and then replicated with slave partitions.<br>
+    There several durability options for producer acknowledge.
+    * **acks=0** when set, producer not waits for the acknowledge. The record will be immediately added to the socket buffer and considered sent.the retries configuration will not take effect
+    * **acks=1** this will ensure the record is placed in leader partition
+    * **acks=all** this is the strongest durability option, which means the record is placed in all of the replicas in cluster.
+    
+    Records with the same key will be placed within the same partition.
+
+    _`murmurhash(key) % number_of_partitions`_ function will be used for partition assignment.
+
+    ---
+
+    ## Kafka performance
+    Kafka relies on the OS kernel
+    * Uses zero-copy
+    * Batch data records into chunks which allows for more efficient data compression and reduces I/O latency
+    * Immutable sequential commit log, avoiding random disk access and fastens disk seeking
+    * Horizontally scalable with sharding, it shards a topic log into partitions
+    * Caching with Sequential I/O
+    * Low latency native binary protocol, with less overhead
+    * Not uses traditional tree data structures like BTree or LSM tree, it is just sequential data which is more convenient for queue systems
+
+    ---
+
+    ## Producer code snippet
+    Here is a simple example of using the producer to send records with strings containing sequential numbers as the key/value pairs.
+    ```java
+    Properties props = new Properties();
+    props.put("bootstrap.servers", "localhost:9092");
+    props.put("acks", "all");
+    props.put("retries", 0);
+    props.put("batch.size", 16384);
+    props.put("buffer.memory", 33554432);
+    props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+    props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+
+    Producer<String, String> producer = new KafkaProducer<>(props);
+    for (int i = 0; i < 100; i++)
+       producer.send(new ProducerRecord<String, String>("my-topic", Integer.toString(i), Integer.toString(i)));
+
+    producer.close();
+    ```
+
+    ---
+
+    ## Consumer code snippet
+    This example demonstrates a simple usage of Kafka's consumer api that relies on automatic offset committing.
+    ```java
+    Properties props = new Properties();
+    props.setProperty("bootstrap.servers", "localhost:9092");
+    props.setProperty("group.id", "test");
+    props.setProperty("enable.auto.commit", "true");
+    props.setProperty("auto.commit.interval.ms", "1000");
+    props.setProperty("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+    props.setProperty("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
+    KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
+    consumer.subscribe(Arrays.asList("foo", "bar"));
+    while (true) {
+       ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
+       for (ConsumerRecord<String, String> record : records)
+           System.out.printf("offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value());
+    }
+    ```
+
+    ---
+
+    layout: true
+
+    #### <img alt="Kafka Logo" src="img/kafka-logo.png" style="width:9px;"/> Get started with Kafka
+
+    ---
+
+    ## Distributions
+    Besides to Apache Kafka distribution, there is others with some minor/major additional components.
+    * Confluent Platform
+    * Cloudera Kafka
+    * IBM Event Streams
+    * Hortonworks
+    * etc.
+
+    ---
+
+    layout: false
+    class: middle, center
+
+    ## Thanks :)
+
+</textarea>
+<script src="./js/remark-latest.min.js">
+</script>
+<script>
+    const slideshow = remark.create();
+</script>
+</body>
+</html>
