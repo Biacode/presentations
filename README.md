@@ -39,7 +39,7 @@ Slides/Repo - https://github.com/Biacode/presentations/tree/master/testing/#1
 
 Video - https://www.youtube.com/watch?v=ZK_LBSaX-ao
 
-### Getting started with Apache Kafka
+### Geting started with Apache Kafka
 
 Conference - WebbFontaine
 
