@@ -42,7 +42,7 @@ Seasoned technology leader and engineer with over 15 years of comprehensive expe
 * Contributed to client-side C++ application development involving OS-native APIs, desktop capture, and WebRTC.
 * *Technologies: Java, Kotlin, Spring Boot, Microservices, Kafka, NATS, Event Sourcing, CQRS, DDD, MongoDB, Postgres, C++, WebRTC, AWS, GCP, Azure, Kubernetes, Terraform.*
 
-**Volunteer Instructor** | ACA (Armenian Code Academy) | May 2021 - Sep 2021
+**Volunteer Instructor** | [ACA (Armenian Code Academy)](https://aca.am) | May 2021 - Sep 2021
 * Shared industry expertise by teaching volunteer courses focused on software engineering principles and best practices.
 * Mentored students aiming to build careers in software development.
 * Recruited and subsequently mentored top-performing students from the course as interns.
